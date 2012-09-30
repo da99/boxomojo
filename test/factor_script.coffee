@@ -58,12 +58,26 @@ describe "Parse ( )", () ->
     result = s.parse()
     assert.deepEqual result, ["Var", "is:", { values: [ "1", "2", "3"], char: '(' } ]
 
+describe "Parse { }", () ->
+
   it "separates { } as a Hash", () ->
     s = new script.New """
       Var is: { 1 2 3 }
     """
     result = s.parse()
     assert.deepEqual result, ["Var", "is:", { values: [ "1", "2", "3"], char: '{' } ]
+
+describe "Parse [ ]", () ->
+
+  it "separates { } as a Hash", () ->
+    s = new script.New """
+      Var is: [ 1 2 3 ]
+    """
+    result = s.parse()
+    assert.deepEqual result, ["Var", "is:", { values: [ "1", "2", "3"], char: '[' } ]
+    
+    
+describe "Parse nesting blocks", () ->
     
   it "separates nested ( { } ) as a Hash", () ->
     s = new script.New """
@@ -79,4 +93,45 @@ describe "Parse ( )", () ->
       } 
     ]
     assert.deepEqual result, target
+    
+  it "separates nested ( { } [ ] ) as a Hash", () ->
+    s = new script.New """
+      Var is:  ( { 1 2 3 } [ 4 5 6 ] )
+    """
+    result = s.parse()
+    target = [ 
+      "Var", 
+      "is:", 
+      {
+        values: [ 
+          {values: ["1", "2", "3"], char: "{"}, 
+          {values: ["4", "5", "6"], char: "["} 
+        ]
+        char: '(' 
+      } 
+    ]
+    assert.deepEqual result, target
 
+  it "raises an error if blocks are mismatch", () ->
+    s = new script.New """
+      Var is:  ( { 1 2 3 ] [ 4 5 6 } )
+    """
+    err = null
+    try
+      s.parse()
+    catch e
+      err = e
+
+    assert.deepEqual err.message, "Closing the wrong block. actual: ] expected: }"
+
+  it "raises an error if closing an unopened block", () ->
+    s = new script.New """
+      Var is: 1 2 3 ] [ 4 5 6 ]
+    """
+    err = null
+    try
+      s.parse()
+    catch e
+      err = e
+
+    assert.deepEqual err.message, "Ending unopened block: ]"
