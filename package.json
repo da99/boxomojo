@@ -6,6 +6,9 @@
   "scripts": {
     "test": "mocha  --watch --compilers coffee:coffee-script"
   },
+  "dependencies": {
+    "underscore": "1.x.x"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/da99/factor_script"

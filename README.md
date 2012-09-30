@@ -22,9 +22,9 @@ Installation and Usage:
 
     factor_script = require("factor_script")
 
-    u = factor_script.New """
+    u = new factor_script.New """
       One is: 1 
-      Six is: run ( One + 5 ) 
+      Six is: ( One + 5 ) 
     """
     u.run()
     vals = (v for k, v of u.data() ) 
@@ -36,12 +36,12 @@ Installation and Usage:
 If/else
 ------
 
-    u = factor_script.New """
-      If ( true ) ( 
-        One is: 1 
-      ) else ( 
+    u = new factor_script.New """
+      If ( true == true ) { 
+        One is: 1
+      } else { 
         Two is: 2 
-      )
+      } 
       
     """
     u.run()
@@ -88,5 +88,8 @@ to Factor.
 
 Forgive me, [Slave Pestov](http://web.archive.org/web/20100212062526/http://factorcode.org/slava/).
 (He's the cranky old dude who created the Factor language.)
+
+
+
 
 
