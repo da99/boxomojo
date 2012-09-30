@@ -26,6 +26,8 @@ describe "Parse", () ->
     result = s.parse()
     assert.deepEqual result, ["One", "is:", "1"]
 
+describe "Parse Strings", () ->
+  
   it "keeps strings together", () ->
     s = new script.New """
       One is: "This sentence."
@@ -46,3 +48,35 @@ describe "Parse", () ->
     """
     result = s.parse()
     assert.deepEqual result, ["Var", "is:", 'This sentence with ^"start and end!"^']
+
+describe "Parse ( )", () ->
+
+  it "separates ( ) as a Hash", () ->
+    s = new script.New """
+      Var is: ( 1 2 3 )
+    """
+    result = s.parse()
+    assert.deepEqual result, ["Var", "is:", { values: [ "1", "2", "3"], char: '(' } ]
+
+  it "separates { } as a Hash", () ->
+    s = new script.New """
+      Var is: { 1 2 3 }
+    """
+    result = s.parse()
+    assert.deepEqual result, ["Var", "is:", { values: [ "1", "2", "3"], char: '{' } ]
+    
+  it "separates nested ( { } ) as a Hash", () ->
+    s = new script.New """
+      Var is:  ( { 1 2 3 } { 4 5 6 } )
+    """
+    result = s.parse()
+    target = [ 
+      "Var", 
+      "is:", 
+      {
+        values: [ {values: ["1", "2", "3"], char: "{"}, {values: ["4", "5", "6"], char: "{"} ]
+        char: '(' 
+      } 
+    ]
+    assert.deepEqual result, target
+
