@@ -20,9 +20,9 @@ Installation and Usage:
 
     your_shell> npm install factor_script
 
-    fscript = require("factor_script")
+    factor_script = require("factor_script")
 
-    u = new fscript.script """
+    u = factor_script.New """
       One is: 1 
       Six is: run ( One + 5 ) 
     """
@@ -36,7 +36,7 @@ Installation and Usage:
 If/else
 ------
 
-    u = new fscript.script """
+    u = factor_script.New """
       If ( true ) ( 
         One is: 1 
       ) else ( 
@@ -50,6 +50,15 @@ If/else
     
     # --> ["1"]
 
+
+
+Are you being forced to write code against your will?
+----------------------------
+
+* Use [Squeak](http://www.youtube.com/results?search_query=squeak+etoys&oq=squeak+etoys). 
+* Try [learning programming](http://www.khanacademy.org/cs) the traditional way.
+* You can also [learn programming the hard way](http://learncodethehardway.org/).
+
     
 Commercial Break:
 -----------------
@@ -58,7 +67,7 @@ Commercial Break:
 
 [The Adventures of Buckaroo Banzai](http://www.youtube.com/watch?feature=player_detailpage&v=8MqJ3iGBdOo#t=24s)
 
-<!-- [Slava Pestov on Factor](http://www.youtube.com/watch?v=f_0QlhYlS8g) -->
+[The Awesomeness of Factor](http://www.youtube.com/watch?v=f_0QlhYlS8g)
 
 <!-- http://www.amazon.com/dp/B00005JKEX/?tag=miniunicom-20 -->
 
@@ -78,6 +87,6 @@ personal glory. As JavaScript is to Java, Factor\_Script has no relation
 to Factor.
 
 Forgive me, [Slave Pestov](http://web.archive.org/web/20100212062526/http://factorcode.org/slava/).
-(He's the cranky old man who created the Factor language.)
+(He's the cranky old dude who created the Factor language.)
 
 
