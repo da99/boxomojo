@@ -30,7 +30,7 @@ Installation and Usage:
 
     factor_script = require("factor_script")
 
-    u = new factor_script.New """
+    u = new factor_script """
       One is: 1 
       Six is: ( One + 5 ) 
     """
@@ -44,7 +44,7 @@ Installation and Usage:
 If/else
 ------
 
-    u = new factor_script.New """
+    u = new factor_script """
       If ( true == true ) { 
         One is: 1
       } else { 
