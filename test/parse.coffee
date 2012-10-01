@@ -52,14 +52,22 @@ describe "Parse { }", () ->
     result = s.parse()
     assert.deepEqual result, ["Var", "is:", { values: [ "1", "2", "3"], start: '{', end: '}' } ]
 
-describe "Parse *{ }", () ->
+describe 'Parse #{ }', () ->
 
-  it "separates *{ } as a Hash", () ->
+  it 'separates #{ } as a Hash', () ->
+    s = new script.New ' Var is: #{ 1 2 3 } '
+    result = s.parse()
+    assert.deepEqual result, ["Var", "is:", { values: [ "1", "2", "3"], start: '#{', end: '}' } ]
+
+describe "Parse w{ }", () ->
+
+  it "separates w{ } as a Hash", () ->
     s = new script.New """
-      Var is: *{ 1 2 3 }
+      Var is: w{ 1 2 3 }
     """
     result = s.parse()
-    assert.deepEqual result, ["Var", "is:", { values: [ "1", "2", "3"], start: '*{', end: '}' } ]
+    assert.deepEqual result, ["Var", "is:", { values: [ "1", "2", "3"], start: 'w{', end: '}' } ]
+    
     
     
 describe "Parse nesting blocks", () ->
@@ -82,10 +90,8 @@ describe "Parse nesting blocks", () ->
     ]
     assert.deepEqual result, target
     
-  it "separates nested ( { } *{ } ) as a Hash", () ->
-    s = new script.New """
-      Var is:  ( { 1 2 3 } *{ 4 5 6 } )
-    """
+  it 'separates nested ( { } #{ w{ } } ) as a Hash', () ->
+    s = new script.New ' Var is:  ( { 1 2 3 } #{ 4 w{ O is: 1 } 5 6 } ) '
     result = s.parse()
     target = [ 
       "Var", 
@@ -93,7 +99,7 @@ describe "Parse nesting blocks", () ->
       {
         values: [ 
           {values: ["1", "2", "3"], start: "{", end: '}'}, 
-          {values: ["4", "5", "6"], start: "*{", end: '}'} 
+          {values: ["4", {values: ['O', 'is:', '1'], start: 'w{', end: '}'}, "5", "6"], start: '#{', end: '}'} 
         ]
         start: '(' 
         end: ')'
@@ -103,7 +109,7 @@ describe "Parse nesting blocks", () ->
 
   it "raises an error if blocks are mismatch", () ->
     s = new script.New """
-      Var is:  ( { 1 2 3 ) *{ 4 5 6 } )
+      Var is:  ( { 1 2 3 ) w{ 4 5 6 } )
     """
     err = null
     try
