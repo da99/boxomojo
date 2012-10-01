@@ -6,10 +6,11 @@ This is still being developed. It is **not** on the npm directory yet.
 Factor\_Script
 --------------
 
-The Factor Programming Language is one of the best languages.
+The [Factor Programming Language](http://factorcode.org/) is one of the best languages ever made.
 It is also why people rarely use it: It's too superior. It's
 why people use SecondLife instead of OpenCroquet. It's why people
-design server/client systems instead of Internet-based systems.
+design server/client systems instead of Internet-based systems. Superiority is different, freightening, and unwelcomed. Mediocrity is 
+incremental, familiar, and desired.
 
 You tried the best. Now try the rest...  
 
