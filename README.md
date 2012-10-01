@@ -6,7 +6,14 @@ This is still being developed. It is **not** on the npm directory yet.
 Factor\_Script
 --------------
 
-The easiest to get the computer to do your bidding.
+The Factor Programming Language is one of the best languages.
+It is also why people rarely use it: It's too superior. It's
+why people use SecondLife instead of OpenCroquet. It's why people
+design server/client systems instead of Internet-based systems.
+
+You tried superiority. Now try the rest...  
+
+Factor\_Script. Go forth or backward ;)
 
 
 Mastering the subtle art of writing factor scripts.
