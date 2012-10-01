@@ -23,3 +23,24 @@ Variables are introduced as key/value settings in the current environment
 user/programmer is not willing to embrace the awesomeness of 
 concatentive, stack based architecture.
 
+More on the naming...
+=====================
+
+Previous name: The Universal Programming Language. 
+
+I started implementing it as a Ruby gem, [Uni\_Lang](https://github.com/da99/Uni_Lang), 
+but I switched entirely to Coffeescript on Node.js. CoffeeScript is a good enough
+Ruby.
+
+Why the stupid name?: i\_love\_u
+-------------------
+
+As a practical joke on all overpaid, idiot middle managers telling their 
+overlords they will be implementating "the solution with i love u."
+
+Also, people love stupid. People love outrageous. When your goal in life 
+is to pro-create in the suburbs, your standards in entertainment are 
+toddler-like.
+
+
+

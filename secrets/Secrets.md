@@ -10,37 +10,6 @@ serious long-term use. Users gain that kind of experience,
 but reviewers and pundits generally do not."
 -- [http://scripting.com/stories/2012/08/28/whatIWantedPartIi.html](http://scripting.com/stories/2012/08/28/whatIWantedPartIi.html)
 
-Learning How to Program
------------------------
-
-You need the right languages and the right approach for you.
-How? No idea. Just search online and ask different people
-until you find what you are looking for.
-
-Here are a few suggestions:
-* [A Scheme Story: High School Computing: The Inside Story](http://www.trollope.org/scheme.html)
-  * [Discussion](http://news.ycombinator.com/item?id=4379482)
-* [Learn Python The Hard Way](http://learnpythonthehardway.org/)
-
-History Trivia
----------
-
-Previous name: The Universal Programming Language. 
-
-I started implementing it as a Ruby gem, [Uni\_Lang](https://github.com/da99/Uni_Lang), 
-but I switched entirely to Coffeescript on Node.js. CoffeeScript is a good enough
-Ruby.
-
-
-Why the stupid name?
--------------------
-
-As a practical joke on all overpaid, idiot middle managers telling their 
-overlords they will be implementating "the solution with i love u."
-
-Also, people love stupid. People love outrageous. When your goal in life 
-is to pro-create in the suburbs, your standards in entertainment are 
-toddler-like.
 
 What apps should you create?
 ----------------------------
