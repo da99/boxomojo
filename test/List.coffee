@@ -4,25 +4,31 @@ assert = require "assert"
 List   = require "factor_script/lib/List"
 
 
-describe "List", () ->
+new_code = (c) ->
+  new script.New c
 
-  it "allows both keys and automatic integer keys", () ->
+describe "List: w{", () ->
+
+  it "allows keys", () ->
 
     s = new_code """
-        Var is: *{
-          name is: "LIST" 
-          "two"
+        Var is: w{
+          name is: "LIST" ,
           city is: "Hong Kong"
         }
     """
 
-    assert.deepEqual s.run().get_var("Var").to_hash(), { 
+    assert.deepEqual s.run().var_read("Var").to_hash(), { 
       name: "LIST"
-      "2":  "two"
       city: "Hong Kong"
     }
     
-describe "List push", () ->
+describe 'List: #{', () ->
   
-  it "keeps a list of numerical indexes"
-  
+  it "keeps a list of numerical indexes", () ->
+    s = new_code """
+        Var is: \#{ 1 , 2 , 3 }
+    """
+
+    assert.deepEqual s.run().stack, [1,2,3]    
+    
