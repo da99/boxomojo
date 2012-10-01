@@ -11,7 +11,7 @@ It is also why people rarely use it: It's too superior. It's
 why people use SecondLife instead of OpenCroquet. It's why people
 design server/client systems instead of Internet-based systems.
 
-You tried superiority. Now try the rest...  
+You tried the best. Now try the rest...  
 
 Factor\_Script. Go forth or backward ;)
 
