@@ -1,10 +1,9 @@
 
-script = require "factor_script"
 assert = require 'assert'
 _      = require "underscore"
+helpers = require "factor_script/lib/test/default"
 
-new_code = (c) ->
-  new script.New c
+new_code = helpers.new_code
   
 describe "New", () ->
 
@@ -12,7 +11,7 @@ describe "New", () ->
     s = new_code """
       One is: 1
     """
-    assert.equal s["is a factor script?"], true
+    assert.equal s["is env?"], true
 
   it "sets 'original code'", () ->
     code = """
