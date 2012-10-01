@@ -1,6 +1,9 @@
 
 script = require "factor_script"
 assert = require 'assert'
+helpers = require "factor_script/lib/test/default"
+
+str = helpers.str
 
 describe "Parse", () ->
 
@@ -18,21 +21,21 @@ describe "Parse Strings", () ->
       One is: "This sentence."
     """
     result = s.parse()
-    assert.deepEqual result, ["One", "is:", "This sentence."]
+    assert.deepEqual result, ["One", "is:", str("This sentence.")]
 
   it 'escapes quotation marks with ^" and "^', () ->
     s = new script.New """
       Var is: "This sentence with ^"start and end!"^"
     """
     result = s.parse()
-    assert.deepEqual result, ["Var", "is:", 'This sentence with "start and end!"']
+    assert.deepEqual result, ["Var", "is:", str 'This sentence with "start and end!"']
 
   it 'escapes escaped quotation marks with ^^" and "^^', () ->
     s = new script.New """
       Var is: "This sentence with ^^"start and end!"^^"
     """
     result = s.parse()
-    assert.deepEqual result, ["Var", "is:", 'This sentence with ^"start and end!"^']
+    assert.deepEqual result, ["Var", "is:", str 'This sentence with ^"start and end!"^']
 
 describe "Parse ( )", () ->
 
