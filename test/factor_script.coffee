@@ -32,6 +32,20 @@ describe '.run()', () ->
       err = e
     assert.deepEqual err.message, "run: Word not defined: " + word
 
+describe 'Base variables create', () ->
+  
+  it 'saves variable to stack', () ->
+
+    s = new_code ' "One" is: 1 '
+    s.run()
+    assert.deepEqual s.stack(), [ num('1') ]
+
+  it 'saves variables to w{}s', () ->
+
+    s = new_code ' "One" is: 1 '
+    s.run()
+    assert.deepEqual s.stack('Local Vars'), { 'One': num('1')}
+
 describe 'Stack', () ->
 
   it 'adds numbers to stack', () ->
