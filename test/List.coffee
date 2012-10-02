@@ -24,6 +24,20 @@ describe "List: w{", () ->
       city: str("Hong Kong")
     }
     
+  it 'sets read env to outside', () ->
+    s = new_code """
+      "Uno" is: "uno"
+      "One" is: "one"
+      "Var"  is: w{ 
+        "name" is: Uno
+        "nick" is: One
+      }
+    """
+    assert.deepEqual s.run().var_read("Var"), {
+      name: str("uno")
+      nick: str("one")
+    }
+    
 describe 'List: #{', () ->
   
   it "keeps a list of numerical indexes", () ->
@@ -31,4 +45,15 @@ describe 'List: #{', () ->
     s.run()
     
     assert.deepEqual s.var_read('Var'), [ num('1'), num('2'), num('3') ]
+    
+  it 'sets read env to outside', () ->
+    s = new_code '
+      "Uno" is: "uno"
+      "One" is: "one"
+      "Var"  is: #{ 
+        "name" is: Uno
+        "nick" is: One
+      }
+    '
+    assert.deepEqual s.run().var_read("Var"), [ str("uno") , str("one") ]
     
