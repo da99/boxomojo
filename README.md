@@ -6,7 +6,7 @@ This is still being developed. It is **not** on the npm directory yet.
 Factor\_Script: Go forth or backward ;)
 --------------
 
-Factor\_Script is made as a problem-orientated language (aka POL, DSL) for adding functionality to a
+Factor\_Script is a problem-orientated language (aka POL, DSL) for adding functionality to a
 website I am working on.  JavaScript has almost-non-existent sandboxing features and I am afraid to use [ADSafe](http://adsafe.org/),
 so I had to create my own alternative.  Factor\_Script is not meant to be a way to generate JavaScript. It is meant 
 to be a sandbox on top of JavaScript. Libraries will be used to create fully functioning web apps: database access, 
