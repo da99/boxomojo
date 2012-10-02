@@ -13,13 +13,13 @@ describe "New", () ->
     s = new_code """
       One is: 1
     """
-    assert.equal s["is env?"], true
+    assert.equal s.var_read("is env?"), true
 
-  it "sets 'original code'", () ->
+  it "sets 'Original Instructions'", () ->
     code = """
       One is: 1
     """
-    assert.equal new_code(code)["original code"], code
+    assert.equal new_code(code).var_read("Original Instructions"), code
 
 describe '.run()', () ->
     
@@ -30,7 +30,7 @@ describe '.run()', () ->
       s.run()
     catch e
       err = e
-    assert.deepEqual err.message, "run: Word not defined: " + word
+    assert.deepEqual err.message, "missing_var: " + word
 
 describe 'Base variables create', () ->
   

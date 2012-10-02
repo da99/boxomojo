@@ -18,7 +18,7 @@ describe "List: w{", () ->
         }
     """
     
-    assert.deepEqual s.run().var_read("Var").to_hash(), { 
+    assert.deepEqual s.run().var_read("Var"), { 
       name: "LIST"
       city: "Hong Kong"
     }
