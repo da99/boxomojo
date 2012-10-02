@@ -3,18 +3,27 @@ Note:
 
 This is still being developed. It is **not** on the npm directory yet.
 
-Factor\_Script
+Factor\_Script: Go forth or backward ;)
 --------------
 
-The [Factor Programming Language](http://factorcode.org/) is one of the best languages ever made.
+Factor\_Script is made as a problem-orientated language (aka POL, DSL) for adding functionality to a
+website I am working on.  JavaScript has almost-non-existent sandboxing features and I am afraid to use [ADSafe](http://adsafe.org/),
+so I had to create my own alternative.  Factor\_Script is not meant to be a way to generate JavaScript. It is meant 
+to be a sandbox on top of JavaScript. Libraries will be used to create fully functioning web apps: database access, 
+HTML/CSS creation, and scripting.
+
+Factor\_Script is inspired by Factor [Factor General Purpose Programming Language](http://factorcode.org/).
+Any connection to Factor stops there.  Factor\_Script has been made without the approval of the Factor 
+community and its creator, [Slave Pestov](http://web.archive.org/web/20100212062526/http://factorcode.org/slava/).
+
+I chose Factor language because it is the best languages I have ever seen.
 It is also why people rarely use it: It's too superior. It's
 why people use SecondLife instead of OpenCroquet. It's why people
 design server/client systems instead of Internet-based systems. Superiority is different, freightening, and unwelcomed. Mediocrity is 
-incremental, familiar, and desired.
+incremental, familiar, and desired. Which explains the popularity of: VBScript, PHP, and Ruby.
 
-You tried the best. Now try the rest...  
-
-Factor\_Script. Go forth or backward ;)
+I am also not a programmer. I have no formal education on software, hardware, 
+history, religion, economics, etiquette, English, basic hygiene, etc. 
 
 
 Mastering the subtle art of writing factor scripts.
@@ -93,18 +102,6 @@ Ending Credits:
 
 *Written, Produced, and Directed* <br />
 by reading, pacing around, and thinking.
-
-
-History & Disclaimers
--------
-
-I bastardized the fantastic [Factor General Purpose Programming Language](http://factorcode.org/) for my own
-personal glory. As JavaScript is to Java, Factor\_Script has no relation
-to Factor.
-
-Forgive me, [Slave Pestov](http://web.archive.org/web/20100212062526/http://factorcode.org/slava/).
-(He's the cranky old dude who created the Factor language.)
-
 
 
 
