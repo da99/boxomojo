@@ -20,10 +20,7 @@ I chose Factor language because it is the best languages I have ever seen.
 It is also why people rarely use it: It's too superior. It's
 why people use SecondLife instead of OpenCroquet. It's why people
 design server/client systems instead of Internet-based systems. Superiority is different, freightening, and unwelcomed. Mediocrity is 
-incremental, familiar, and desired. Which explains the popularity of: VBScript, PHP, and Ruby.
-
-I am also not a programmer. I have no formal education on software, hardware, 
-history, religion, economics, etiquette, English, basic hygiene, etc. 
+incremental, familiar, and desired. Which explains the popularity of: [censored: name of mediocre scripting languages].
 
 
 Mastering the subtle art of writing factor scripts.
