@@ -6,6 +6,7 @@ helpers = require "factor_script/lib/test/default"
 
 new_code = helpers.new_code
 str      = helpers.str
+num      = helpers.num
 
 describe "List: w{", () ->
 
@@ -13,22 +14,21 @@ describe "List: w{", () ->
 
     s = new_code """
         "Var" is: w{
-          name is: "LIST" ,
-          city is: "Hong Kong"
+          "name" is: "LIST" ,
+          "city" is: "Hong Kong"
         }
     """
     
     assert.deepEqual s.run().var_read("Var"), { 
-      name: "LIST"
-      city: "Hong Kong"
+      name: str("LIST")
+      city: str("Hong Kong")
     }
     
 describe 'List: #{', () ->
   
   it "keeps a list of numerical indexes", () ->
-    s = new_code """
-        "Var" is: \#{ 1 , 2 , 3 }
-    """
+    s = new_code ' "Var" is: \#{ 1 , 2 , 3 } '
+    s.run()
     
-    assert.deepEqual s.run().stack, [1,2,3]    
+    assert.deepEqual s.var_read('Var'), [ num('1'), num('2'), num('3') ]
     
