@@ -4,6 +4,7 @@
 * No access to install base usernames, unless users pay publisher/author.
 * No access to main ACL page.
 * Open-source code only, waiting period/publication pergatory.
+* FF extensions, Ubuntu Software
 
 
 
