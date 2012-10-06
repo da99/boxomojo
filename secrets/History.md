@@ -9,7 +9,7 @@ so I had to create my own alternative.  Factor\_Script is not meant to be a way 
 to be a sandbox on top of JavaScript. (Similar to [Quby](http://www.playmycode.com/docs/quby#s_about).) Libraries will be used to create fully functioning web apps: database access, 
 HTML/CSS creation, and scripting.
 
-Factor\_Script is inspired by Factor [Factor General Purpose Programming Language](http://factorcode.org/).
+Factor\_Script is inspired by [Factor General Purpose Programming Language](http://factorcode.org/).
 Any connection to Factor stops there.  Factor\_Script has been made without the approval of the Factor 
 community and its creator, [Slave Pestov](http://web.archive.org/web/20100212062526/http://factorcode.org/slava/).
 
