@@ -3,83 +3,87 @@ Note:
 
 This is still being developed. It is **not** on the npm directory yet.
 
-Factor\_Script: Go forth or backward ;)
---------------
+Disclaimer:
+-----------
 
-Factor\_Script is a problem-orientated language (aka POL, DSL) for adding functionality to a
-website I am working on.  JavaScript has almost-non-existent sandboxing features and I am afraid to use [ADSafe](http://adsafe.org/),
-so I had to create my own alternative.  Factor\_Script is not meant to be a way to generate JavaScript. It is meant 
-to be a sandbox on top of JavaScript. Libraries will be used to create fully functioning web apps: database access, 
-HTML/CSS creation, and scripting.
+Factor\_Script was inspired by the [Factor General Purpose Programming Language](http://factorcode.org/).
+Howevere, they have no further relation beyond that.  The Factor Community is not even aware this project
+exists. 
 
-Factor\_Script is inspired by Factor [Factor General Purpose Programming Language](http://factorcode.org/).
-Any connection to Factor stops there.  Factor\_Script has been made without the approval of the Factor 
-community and its creator, [Slave Pestov](http://web.archive.org/web/20100212062526/http://factorcode.org/slava/).
-
-I chose Factor language because it is the best languages I have ever seen.
-It is also why people rarely use it: It's too superior. It's
-why people use SecondLife instead of OpenCroquet. It's why people
-design server/client systems instead of Internet-based systems. Superiority is different, freightening, and unwelcomed. Mediocrity is 
-incremental, familiar, and desired. Which explains the popularity of: [censored: name of mediocre scripting languages].
-
-
-Mastering the subtle art of writing factor scripts.
--------
-
-Get your idiot friends to teach it to you.
-
-
-Installation and Usage:
+Installation:
 -----------------------
 
-    your_shell> npm install factor_script
+    shell> npm install factor_script
 
-    factor_script = require("factor_script")
-
-    u = new factor_script """
-      One is: 1 
-      Six is: ( One + 5 ) 
-    """
-    u.run()
-    vals = (v for k, v of u.data() ) 
-    vals
+    javascript psuedo code>  
     
-    # --> ["1", 6.0]
-    
-    
-If/else
-------
-
-    u = new factor_script """
-      If ( true == true ) { 
-        One is: 1
-      } else { 
-        Two is: 2 
-      } 
+      Factor_Script = require 'factor_script'
       
-    """
-    u.run()
-    vals = (v for k, v of u.data() ) 
-    vals
-    
-    # --> ["1"]
+      machine = new Factor_Script.Machine """
+      
+        ***
+          This is a comment. 
+          This does not place anything on the stack.
+          Anything between the pair of "***" is dropped.
+        ***
+
+        ***
+          Defining a variable:
+            In other words: place the string, "One", on a stack.
+            execute "is:" as a function that grabs the previous 
+            item, "One", and the proceding item, the number 1.
+            Save as a variable.
+        ***
+
+        "One" is: 1 
+
+
+        ***
+            ( ) : Anything between the parenthesis is run in a separete stack
+                  and the last item is returned. 
+                  It is equivalent to: run { }
+                  
+            { } : Anonymous function. Factor uses the square brackets, Factor_Script
+                  uses curly brackets.
+        ***
+        
+        if ( One == 1 ) {
+          "Result" is: "it works"
+        } else {
+          "Result" is: "Factor_Script does not work"
+        }
+
+        *** Calculation ***
+        
+        1 + 2 + 3
+
+        *** Arrays are called: numbered lists ***
+
+        "Array" is:           #{ 0 1 2 3 4 }#
+        "Optional Commas" is: #{ 0 , 1 , 2 }#
+        "Added Array" is:     #{ 1 2 3 }# + #{ 4 5 6 }#
+
+        *** Hashes/Dictionaries are called: worded lists ***
+
+        "Number Names"  is: w{ 
+          "Zero" is: 0
+          "One"  is: 1
+          "Two"  is: 2
+        }w
+
+
+        |> "New Function"
+           #{ "str" "string?" }" "to-number" None 
+             #{ "number?" }#  
+             { |> "Number Names" index str } 
+
+        0 to-number  
+        *** Places "Zero" on the stack. ***
+        
+      """
 
 
 
-Are you being forced to write code against your will?
-----------------------------
-
-You need the right languages and the right approach for you.
-How? No idea. Just search online and ask different people
-until you find what you are looking for.
-
-Here are a few suggestions:
-* Use [Squeak](http://www.youtube.com/results?search_query=squeak+etoys&oq=squeak+etoys). 
-* Try [learning programming](http://www.khanacademy.org/cs) the traditional way.
-* You can also [learn programming the hard way](http://learncodethehardway.org/).
-* [A Scheme Story: High School Computing: The Inside Story](http://www.trollope.org/scheme.html)
-  * [Discussion](http://news.ycombinator.com/item?id=4379482)
-* [Learn Python The Hard Way](http://learnpythonthehardway.org/)
 
     
 Commercial Break:

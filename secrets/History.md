@@ -1,4 +1,26 @@
 
+
+Factor\_Script: Go forth or backward ;)
+--------------
+
+Factor\_Script is a problem-orientated language (aka POL, DSL) for adding functionality to a
+website I am working on.  JavaScript has almost-non-existent sandboxing features and I am afraid to use [ADSafe](http://adsafe.org/),
+so I had to create my own alternative.  Factor\_Script is not meant to be a way to generate JavaScript. It is meant 
+to be a sandbox on top of JavaScript. (Similar to [Quby](http://www.playmycode.com/docs/quby#s_about).) Libraries will be used to create fully functioning web apps: database access, 
+HTML/CSS creation, and scripting.
+
+Factor\_Script is inspired by Factor [Factor General Purpose Programming Language](http://factorcode.org/).
+Any connection to Factor stops there.  Factor\_Script has been made without the approval of the Factor 
+community and its creator, [Slave Pestov](http://web.archive.org/web/20100212062526/http://factorcode.org/slava/).
+
+I chose Factor language because it is the best languages I have ever seen.
+It is also why people rarely use it: It's too superior. It's
+why people use SecondLife instead of OpenCroquet. It's why people
+design server/client systems instead of Internet-based systems. Superiority is different, freightening, and unwelcomed. Mediocrity is 
+incremental, familiar, and desired. Which explains the popularity of: [censored: name of mediocre scripting languages].
+
+
+
 The beginning...
 ===============
 
