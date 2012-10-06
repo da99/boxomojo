@@ -78,7 +78,7 @@ Installation:
              { |> "Number Names" index str } 
 
         "Zero" to-number  
-        *** Places "Zero" on the stack. ***
+        *** Places 0 on the stack. ***
         
       """
 
