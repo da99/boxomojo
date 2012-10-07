@@ -8,25 +8,25 @@ Disclaimer:
 
 Factor\_Script was inspired by the [Factor General Purpose Programming Language](http://factorcode.org/).
 Howevere, they have no further relation beyond that.  The Factor Community is not even aware this project
-exists. 
+exists.
 
 Installation:
 -----------------------
 
     shell> npm install factor_script
 
-    javascript psuedo code>  
-    
+    javascript psuedo code>
+
       Factor_Script = require 'factor_script'
-      
+
       machine = new Factor_Script.Machine """
-      
+
         ***
-          This is a comment. 
+          This is a comment.
           This does not place anything on the stack.
           Anything between the pair of "***" is dropped.
         ***
-        
+
         *** Calculation ***
         1 + 2 + 3
 
@@ -43,20 +43,21 @@ Installation:
 
 
         ***
-        
+
             ( )   Anything between the parenthesis is run in a separete stack
                   and the last item is returned.
                   It is equivalent to: run { }
-                  
+
             { }   Anonymous function. Factor uses the square brackets, Factor_Script
                   uses curly brackets.
 
             [ ]   A numbered list. Known as Array in other languages.
 
-           w[ ]w  A worded list. Known as Hash, key-value data structure in other languages.
-          
+           s[ ]s  A stringed list. Like an Array, but with strings as indexes.
+                  Known as Hash, key-value data structure in other languages.
+
         ***
-        
+
         if ( One == 1 ) {
           "Result" is: "it works"
         } else {
@@ -67,19 +68,19 @@ Installation:
         "Optional Commas" is: [ 0 , 1 , 2 ]
         "Added Array" is:     [ 1 2 3 ] + [ 4 5 6 ]
 
-        "Number Names" is: w[
+        "Number Names" is: s[
           "Zero" is: 0
           "One"  is: 1
           "Two"  is: 2
-        ]w
+        ]s
 
         ^<- "New Function"
-           [ "str" "string?" ] "to-number" [ ] ==> [ "number?" ]
-           { ^<- "Number Names" index str }
+           { "str" string? } "to-number" { } ==> { number? }
+           { ^<- "Number Names" <- str }
 
 
         "Zero" to-number *** Places 0 on the stack. ***
-        
+
       """
 
 
