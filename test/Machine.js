@@ -1,5 +1,8 @@
-var _ = require("underscore"),
-    Pos = require('factor_script/lib/Array_Position');
+var _          = require("underscore"),
+    Pos        = require('factor_script/lib/Array_Position'),
+    Var_Finder = require('factor_script/lib/Var_Finder'),
+    Noun = require('factor_script/lib/Noun'),
+    Core = require('factor_script/lib/Core');
 
 
 var Parse = function (code) {
@@ -16,7 +19,8 @@ var Parse = function (code) {
 };
 
 var Factor_Script = function () {};
-var FS = Factor_Script;
+var FS            = Factor_Script;
+var FS.Noun       = Noun;
 
 FS.type_cast = function (str) {
   var num  = Number(str);
@@ -31,150 +35,26 @@ FS.type_cast = function (str) {
   return noun;
 };
 
-// ==============================================================
-//                        Nouns
-// ==============================================================
-
-var Noun = FS.Noun = function () {
-  this.Vars = {};
-  this.Returns = [];
-  this.Read_ables = {};
-  this.Write_ables = {};
-  this.Function_Lists = [];
-};
-
-
-Noun.prototype.value = function () {
-  return this.Vars['value'];
-};
-
-
-Noun.prototype.new_private = function ( name, val ) {
-  this.create(name, val);
-  this.Read_ables[name] = false;
-  return this;
-};
-
-Noun.prototype.new_read_able = function ( name, val ) {
-  this.create(name, val);
-  this.Read_ables[name] = true;
-  return this;
-};
-
-Noun.prototype.create = function(name, val) {
-  this.Vars[name] = val;
-  return val;
-};
-
-Noun.prototype.update = function(name, val) {
-  this.Vars[name] = val;
-  return val;
-};
-
-Noun.prototype.find_verb_target = function (name, must_be_read_able) {
-  if ( this.Vars.hasOwnProperty(name) && ( must_be_read_able ? (this.Read_ables[name]) : true )  )
-    return this;
-
-  var i = this.Function_Lists.len,
-      ans = null;
-  while( --i > -1 && !ans  ) {
-    ans = this.Function_Lists[i].find_verb_target(name, true);
-  };
-
-  return ans;
-
-};
-
-Noun.prototype.find_verb_target_or_throw = function (name, must_be_read_able) {
-  var n = this.find_verb_target(name, must_be_read_able);
-  if (!n)
-    throw new Error("find_verb_target: not found: " + name);
-  return n;
-};
-
-
-// ==============================================================
-//                        Numbers
-// ==============================================================
-
-var Number_Functions = FS.Number_Functions = new Noun();
-Number_Functions.new_read_able("is number?", true);
-Number_Functions.new_read_able('+', function (machine) {
-  var l = machine.noun;
-  var r = machine.grab_forward();
-  return l + r;
-});
-
-Number_Functions.new_read_able('-', function (machine) {
-  var l = machine.noun;
-  var r = machine.grab_forward();
-  return l - r;
-});
-
-// ==============================================================
-//                        Verbs
-// ==============================================================
-
-var Verb_Functions = FS.Verb_Functions = new Noun();
-Verb_Functions.new_read_able('is verb?', true);
 
 // ==============================================================
 //                        Machine
 // ==============================================================
-var Kernel = {
-  '+' : {'functions list?' : true, 'functions': ['num+num']},
-  '-' : {'functions list?' : true, 'functions': ['num-num']},
-  '*' : {'functions list?' : true, 'functions': ['num*num']},
-  '/' : {'functions list?' : true, 'functions': ['num/num']},
-  'num+num' : {
-    backward      : [ 'left',  'number?' ],
-    forward       : [ 'right', 'number?' ],
-    returns       : [ 'number?' ],
-    'javascript?' : true,
-    'function'    : function(local, outer) {
-      return left + right;
-    }
-  },
 
-  'num-num' : {
-    backward : [ ['left',  'number?'] ],
-    forward  : [ ['right', 'number?']],
-    returns  : [ 'number?' ],
-    "javascript?" : true,
-    words    : function(local, outer) {
-      return left - right;
-    }
-  },
+var Machine = FS.Machine = function (code, outside) {
 
-  'num/num' : {
-    backward : [ ['left',  'number?'] ],
-    forward  : [ ['right', 'number?']],
-    returns  : [ 'number?' ],
-    "javascript?" : true,
-    words    : function(local, outer) {
-      return left / right;
-    }
-  },
-
-  'num*num' : {
-    backward : [ ['left',  'number?'] ],
-    forward  : [ ['right', 'number?']],
-    returns  : [ 'number?' ],
-    "javascript?" : true,
-    words    : function(local, outer) {
-      return left * right;
-    }
-  }
-
-}; // kernel
-
-
-
-var Machine = FS.Machine = function (code) {
-  this.Code = code;
+  this.Code    = code;
   this.Returns = [];
   this.Vars    = {};
-  this.Tokens = Parse(code);
+  this.Tokens  = Parse(code);
+  this.Outside = outside;
+  this.Local   = true;
+
+  if (outside) {
+    this.is_local(false);
+  } else {
+    this.is_local(true);
+  };
+
 };
 
 // ==============================================================
@@ -188,10 +68,10 @@ Machine.helpers = {
   },
 
   find_verb_in_noun : function (machine, noun) {
-    var verb = machine.verb,
-        v = noun[verb],
-        pos = null,
-        target = null,
+    var verb     = machine.verb,
+        v        = noun[verb],
+        pos      = null,
+        target   = null,
         func_def = null;
 
     if( v && v['functions list?']) {
@@ -232,12 +112,16 @@ Machine.helpers = {
 //                        Machine Prototype
 // ==============================================================
 
-
-Machine.prototype.insert = function (val) {
-  var noun = FS.type_cast(val);
-  this.Returns.push(noun);
+Machine.prototype.is_local = function () {
+  if (arguments.length == 1) {
+    this.Local = !!arguments[0];
+  };
+  return this.Local;
 };
 
+Machine.prototype._return = function (val) {
+  this.Returns.push(FS.type_cast(val));
+};
 
 Machine.prototype.see_backward = function () {
   return this.Returns[this.Returns.length - 1];
@@ -257,10 +141,10 @@ Machine.prototype.grab_forward = function () {
 
 Machine.prototype.find_verb = function () {
 
-  var f = Machine.helpers.find_verb_in_noun,
-      v = this.verb,
-      t = null,
-      n = null,
+  var f      = Machine.helpers.find_verb_in_noun,
+      v      = this.verb,
+      t      = null,
+      n      = null,
       n_type = null;
 
   t = f(this, this.Vars)
@@ -285,7 +169,7 @@ Machine.prototype.find_verb = function () {
   if (t)
     return t;
 
-  return f(this, Kernel);
+  return f(this, Core);
 
 };
 
