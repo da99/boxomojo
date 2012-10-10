@@ -1,64 +1,7 @@
-var _          = require("underscore"),
-    Pos        = require('factor_script/lib/Array_Position'),
-    Var_Finder = require('factor_script/lib/Var_Finder'),
-    Noun       = require('factor_script/lib/Noun'),
-    Core       = require('factor_script/lib/Core'),
-    Machine    = require('factor_script/lib/Machine');
-
-
-
-var Factor_Script = function () {};
-var FS            = Factor_Script;
-var FS.Noun       = Noun;
-
-FS.type_cast = function (str) {
-  var num  = Number(str);
-  if (_.isNumber(num) && !_.isNaN(num)) {
-    return num;
-  } else {
-    return { value : str , 'is verb?' : true }
-  };
-
-  throw new Error('type_cast: unknown type: ' + str);
-  var noun = new Noun();
-  return noun;
-};
-
-
-
-
-Number.prototype.factor_script = function (verb, m) {
-  switch (verb)  {
-    case 'run-verb':
-      var op = m.grab_forward().value;
-      var num = m.grab_forward();
-      switch (op) {
-        case '+':
-          return this + num;
-          break;
-        case '-':
-          return this - num;
-          break;
-        case '/':
-          return this / num;
-          break;
-        case '*':
-          return this * num;
-          break;
-        default:
-          throw new Error('number: unknown verb: ' + verb);
-      };
-
-      break;
-    default:
-      throw new Error('FS <-> JS: unknown verb: ' + verb);
-  };
-
-};
-
+var factor_script  = require('factor_script/lib/factor_script');
 var assert = require('assert');
 
-describe('Factor_Script interface to JavaScript', function () {
+describe('JavaScript <-> Factor_Script interface', function () {
 
 
   // it( 'has multiple-named functions', function () {
@@ -68,7 +11,7 @@ describe('Factor_Script interface to JavaScript', function () {
   // });
 
   it( 'it runs words/tokens' , function () {
-    var m = new Factor_Script.Machine("+ 2");
+    var m = new factor_script.Box("+ 2");
     assert.equal( (5).factor_script('run-verb', m), 7);
   });
 
