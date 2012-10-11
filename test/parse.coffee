@@ -1,51 +1,65 @@
 
-script = require "factor_script"
-assert = require 'assert'
+Parser  = require('factor_script/lib/Parse').Parser
+assert  = require 'assert'
 helpers = require "factor_script/lib/test/default"
+_       = require 'underscore'
 
 str = helpers.str
 num = helpers.num
 
+parse = (code) ->
+  array = []
+  p = new Parser(code)
+  p.tokens
+
+to_verb = (str) ->
+  { 'verb?' : true, 'value' : str }
+
 describe "Parse", () ->
 
-  it "returns an array", () ->
-    s = new script """
+  it "returns an array of tokens", () ->
+    result = parse """
       One is: uno
     """
-    result = s.parse()
-    assert.deepEqual result, ["One", "is:", "uno"]
+
+    assert.deepEqual result, [ to_verb("One"), to_verb("is:"), to_verb("uno")]
 
 describe "Parse Strings", () ->
-  
+
   it "keeps strings together", () ->
-    s = new script """
-      One is: "This sentence."
+    result = parse """
+      "One" is: "This sentence."
     """
-    result = s.parse()
-    assert.deepEqual result, ["One", "is:", str("This sentence.")]
+
+    assert.deepEqual result, ["One", to_verb("is:"), "This sentence." ]
 
   it 'escapes quotation marks with ^" and "^', () ->
-    s = new script """
+    result = parse """
       Var is: "This sentence with ^"start and end!"^"
     """
-    result = s.parse()
-    assert.deepEqual result, ["Var", "is:", str 'This sentence with "start and end!"']
+
+    assert.deepEqual result, [to_verb("Var"), to_verb("is:"), 'This sentence with "start and end!"']
 
   it 'escapes escaped quotation marks with ^^" and "^^', () ->
-    s = new script """
+    result = parse """
       Var is: "This sentence with ^^"start and end!"^^"
     """
-    result = s.parse()
-    assert.deepEqual result, ["Var", "is:", str 'This sentence with ^"start and end!"^']
+
+    assert.deepEqual result, [to_verb("Var"), to_verb("is:"), 'This sentence with ^"start and end!"^']
 
 describe "Parse Numbers", () ->
 
-  it "puts numbers into an object", () ->
-    s = new script """
+  it "parses integers as JavaScript integers", () ->
+    result = parse """
       "One" is: 1
     """
-    result = s.parse()
-    assert.deepEqual result, [ str('One'), 'is:', num('1')]
+    assert.deepEqual result, [ 'One', to_verb('is:'), 1 ]
+
+  it "parses floats as JavaScript floats", () ->
+    result = parse """
+      "One" is: 1.5
+    """
+    assert.deepEqual result, [ 'One', to_verb('is:'), 1.5 ]
 
 describe "Parse ( )", () ->
 
@@ -80,43 +94,43 @@ describe "Parse w{ }", () ->
     """
     result = s.parse()
     assert.deepEqual result, ["Var", "is:", { values: [ "a", "b", "c"], start: 'w{', end: '}' } ]
-    
-    
-    
+
+
+
 describe "Parse nesting blocks", () ->
-    
+
   it "separates nested ( { } ) as a Hash", () ->
     s = new script """
       Var is:  ( { a b c } { d e f } )
     """
     result = s.parse()
-    target = [ 
-      "Var", 
-      "is:", 
+    target = [
+      "Var",
+      "is:",
       {
-        values: [ 
+        values: [
           {values: "a b c".split(" "), start: "{", end: '}'},
           {values: "d e f".split(" "), start: "{", end: '}'} ]
         start: '('
         end: ')'
-      } 
+      }
     ]
     assert.deepEqual result, target
-    
+
   it 'separates nested ( { } #{ w{ } } ) as a Hash', () ->
     s = new script ' Var is:  ( { a b c } #{ d w{ O is: a } b c } ) '
     result = s.parse()
-    target = [ 
-      "Var", 
-      "is:", 
+    target = [
+      "Var",
+      "is:",
       {
-        values: [ 
-          {values: ["a", "b", "c"], start: "{", end: '}'}, 
-          {values: ["d", {values: ['O', 'is:', 'a'], start: 'w{', end: '}'}, "b", "c"], start: '#{', end: '}'} 
+        values: [
+          {values: ["a", "b", "c"], start: "{", end: '}'},
+          {values: ["d", {values: ['O', 'is:', 'a'], start: 'w{', end: '}'}, "b", "c"], start: '#{', end: '}'}
         ]
-        start: '(' 
+        start: '('
         end: ')'
-      } 
+      }
     ]
     assert.deepEqual result, target
 
