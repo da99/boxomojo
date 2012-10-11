@@ -1,5 +1,6 @@
 
-Parser  = require('factor_script/lib/Parse').Parser
+Parse  = require('factor_script/lib/Parse')
+Parser = Parse.Parser
 assert  = require 'assert'
 helpers = require "factor_script/lib/test/default"
 _       = require 'underscore'
@@ -14,6 +15,14 @@ parse = (code) ->
 
 to_verb = (str) ->
   { 'verb?' : true, 'value' : str }
+to_run_now_func = (o) ->
+  Parse.To_Run_Now_Function(o)
+to_func = (o) ->
+  Parse.To_Function(o)
+to_kv_list = (o) ->
+  Parse.To_KV_List(o)
+to_list = (o) ->
+  Parse.To_List(o)
 
 describe "Parse", () ->
 
@@ -64,99 +73,96 @@ describe "Parse Numbers", () ->
 describe "Parse ( )", () ->
 
   it "separates ( ) as a Hash", () ->
-    s = new script """
-      Var is: ( 1 2 3 )
+    result = parse """
+      "Var" is: ( 1 2 3 )
     """
-    result = s.parse()
-    assert.deepEqual result, ["Var", "is:", { values: [ num("1"), num("2"), num("3")], start: '(', end: ')' } ]
+    assert.deepEqual result, ["Var", to_verb("is:"), to_run_now_func( [ 1, 2, 3] )]
 
 describe "Parse { }", () ->
 
   it "separates { } as a Hash", () ->
-    s = new script """
-      Var is: { v t y }
+    result = parse """
+      "Var" is: { z x c }
     """
-    result = s.parse()
-    assert.deepEqual result, ["Var", "is:", { values: "v t y".split(" "), start: '{', end: '}' } ]
+    assert.deepEqual result, [
+      "Var",
+      to_verb("is:"),
+      to_func([ to_verb('z'), to_verb('x'), to_verb('c')] )
+    ]
 
-describe 'Parse #{ }', () ->
+describe 'Parse [ ]', () ->
 
-  it 'separates #{ } as a Hash', () ->
-    s = new script ' Var is: #{ d e f } '
-    result = s.parse()
-    assert.deepEqual result, ["Var", "is:", { values: [ "d", "e", "f"], start: '#{', end: '}' } ]
-
-describe "Parse w{ }", () ->
-
-  it "separates w{ } as a Hash", () ->
-    s = new script """
-      Var is: w{ a b c }
-    """
-    result = s.parse()
-    assert.deepEqual result, ["Var", "is:", { values: [ "a", "b", "c"], start: 'w{', end: '}' } ]
+  it 'separates [ ] as a List', () ->
+    result = parse ' "Var" is: [ x y z ] '
+    assert.deepEqual result, [ "Var", to_verb("is:"),
+      to_list( [to_verb('x'), to_verb('y'), to_verb('z')] )
+    ]
 
 
+describe 'Parse k[ ]k', () ->
+
+  it 'separates k[ ]k as a KV List', () ->
+    result = parse ' "Var" is: k[ d e f ]k '
+    assert.deepEqual result, [ "Var", to_verb("is:"),
+      to_kv_list( [to_verb('d'), to_verb('e'), to_verb('f')] )
+    ]
 
 describe "Parse nesting blocks", () ->
 
   it "separates nested ( { } ) as a Hash", () ->
-    s = new script """
-      Var is:  ( { a b c } { d e f } )
+    result = parse """
+      "Var" is:  ( { "a" "b" "c" } { "d" "e" "f" } )
     """
-    result = s.parse()
     target = [
       "Var",
-      "is:",
-      {
-        values: [
-          {values: "a b c".split(" "), start: "{", end: '}'},
-          {values: "d e f".split(" "), start: "{", end: '}'} ]
-        start: '('
-        end: ')'
-      }
+      to_verb("is:"),
+      to_run_now_func( [
+        to_func(['a','b','c']),
+        to_func(['d','e','f']),
+      ]
+      )
     ]
     assert.deepEqual result, target
 
-  it 'separates nested ( { } #{ w{ } } ) as a Hash', () ->
-    s = new script ' Var is:  ( { a b c } #{ d w{ O is: a } b c } ) '
-    result = s.parse()
+  it 'separates nested ( { } k[ k[  ]k ]k ) as a Hash', () ->
+    result = parse ' "Var" is:  ( { "a" "b" "c" } k[ d k[ "O" is: "a" ]k b c ]k ) '
     target = [
       "Var",
-      "is:",
-      {
-        values: [
-          {values: ["a", "b", "c"], start: "{", end: '}'},
-          {values: ["d", {values: ['O', 'is:', 'a'], start: 'w{', end: '}'}, "b", "c"], start: '#{', end: '}'}
-        ]
-        start: '('
-        end: ')'
-      }
+      to_verb("is:"),
+      to_run_now_func([
+        to_func(['a','b','c']),
+        to_kv_list([
+          to_verb('d'),
+          to_kv_list(['O', to_verb('is:'), 'a']),
+            to_verb('b'),
+            to_verb('c')
+        ])
+      ])
     ]
+
     assert.deepEqual result, target
 
   it "raises an error if blocks are mismatch", () ->
-    s = new script """
-      Var is:  ( { 1 2 3 ) w{ 4 5 6 } )
-    """
     err = null
     try
-      s.parse()
+      parse """
+        Var is:  ( { 1 2 3 ) k[ 4 5 6 ] )
+      """
     catch e
       err = e
 
-    assert.deepEqual err.message, "Closing the wrong block. actual: ) expected: }"
+    assert.deepEqual err.message, "Closing wrong block: expected: } actual: )"
 
   it "raises an error if closing an unopened block", () ->
-    s = new script """
-      Var is: 1 2 3 } { 4 5 6 }
-    """
     err = null
     try
-      s.parse()
+      parse """
+        Var is: 1 2 3 } { 4 5 6 }
+      """
     catch e
       err = e
 
-    assert.deepEqual err.message, "Ending unopened block: }"
+    assert.deepEqual err.message, "Closing unopened block: }"
 
 
 
