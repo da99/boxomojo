@@ -39,7 +39,6 @@ describe "Parse Strings", () ->
     result = parse """
       "One" is: "This sentence."
     """
-
     assert.deepEqual result, ["One", to_verb("is:"), "This sentence." ]
 
   it 'escapes quotation marks with ^" and "^', () ->
@@ -55,6 +54,18 @@ describe "Parse Strings", () ->
     """
 
     assert.deepEqual result, [to_verb("Var"), to_verb("is:"), 'This sentence with ^"start and end!"^']
+
+  it "parse s[ ]s as a string", () ->
+    result = parse """
+      "One" is: s["This sentence."]s
+    """
+    assert.deepEqual result, ["One", to_verb("is:"), '"This sentence."' ]
+
+  it "escapes ^s[ ]s^ with s[ ]s strings", () ->
+    result = parse """
+      "One" is: s[This ^s[sentence]s^.]s
+    """
+    assert.deepEqual result, ["One", to_verb("is:"), 'This s[sentence]s.' ]
 
 describe "Parse Numbers", () ->
 
