@@ -39,24 +39,30 @@ Installation:
             Save as a variable.
         ***
 
+        "My-Var" is: 100
+
+
+        ***
+
+              ( )   Anything between the parenthesis is run in a separete stack
+                    and the last value is returned.
+                    It is equivalent to: run { }
+
+              { }   Anonymous function. 
+                    Factor uses the [ ] brackets.
+                    Factor_Script uses { } brackets.
+
+              [ ]   A numbered list. Known as Array in other languages.
+
+             k[ ]k  A stringed list. Like an Array, but with strings as indexes.
+                    Known as Hash, key-value data structure in other languages.
+
+              "s"   String. Delimiters:  " "
+    s[my string]s   String. Delimiters: s[ ]s
+
+        ***
+
         "One" is: 1
-
-
-        ***
-
-            ( )   Anything between the parenthesis is run in a separete stack
-                  and the last item is returned.
-                  It is equivalent to: run { }
-
-            { }   Anonymous function. Factor uses the square brackets, Factor_Script
-                  uses curly brackets.
-
-            [ ]   A numbered list. Known as Array in other languages.
-
-           s[ ]s  A stringed list. Like an Array, but with strings as indexes.
-                  Known as Hash, key-value data structure in other languages.
-
-        ***
 
         if ( One == 1 ) {
           "Result" is: "it works"
@@ -66,20 +72,21 @@ Installation:
 
         "Array" is:           [ 0 1 2 3 4 ]
         "Optional Commas" is: [ 0 , 1 , 2 ]
-        "Added Array" is:     [ 1 2 3 ] + [ 4 5 6 ]
+        "Adding Arrays" is:   [ 1 2 3 ] + [ 4 5 6 ]
 
-        "Number Names" is: s[
+        "Number Names" is: k[
           "Zero" is: 0
           "One"  is: 1
           "Two"  is: 2
-        ]s
+        ]k
 
         ^<- "New Function"
-           { "str" string? } "to-number" { } ==> { number? }
+           { "str" string? } "to-number" { }
+           ==> { number? }
            { ^<- "Number Names" <- str }
 
 
-        "Zero" to-number *** Places 0 on the stack. ***
+        "Zero" to-number
 
       """
 
