@@ -60,6 +60,9 @@ Installation:
               "s"   String. Delimiters:  " "
     s[my string]s   String. Delimiters: s[ ]s
 
+     "^"string"^"   String escaping: ^"   "^
+    s[ ^s[ ]s^ ]s   String escaping: ^s[ ]s^
+
         ***
 
         "One" is: 1
