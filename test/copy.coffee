@@ -2,7 +2,7 @@
 h      = require 'factor_script/lib/helpers'
 assert = require 'assert'
 _      = require 'underscore'
-
+objs   = require 'factor_script/lib/Objects'
 
 describe "Helpers: Copy", () ->
 
@@ -41,5 +41,33 @@ describe "Helpers: Copy", () ->
       a3.pop()
 
       assert.deepEqual c, { a: [[1,2,3],[4,5,6]], b: [[1,2,3],[4,5,6]] }
+
+  describe 'Factor Script objects', () ->
+
+    it "does not copy FS box", () ->
+      f = () ->
+        this.vals = ['a']
+        this
+      f.prototype.is_box = true
+
+      o = new f()
+      c = h.copy(o)
+      o.vals.pop()
+      assert.deepEqual c, o
+
+    it "shallow copys 'function lists'", () ->
+      o = new objs.Factor_Script_Object
+      a = ['a']
+      a._id = 2
+      o['Function Lists'].push a
+      c = h.copy(o)
+      a.push 'b'
+
+      assert.deepEqual _.last(c['Function Lists']), a
+
+
+
+
+
 
 
