@@ -1,7 +1,7 @@
 _      = require "underscore"
 script = require "factor_script"
 assert = require "assert"
-List   = require "factor_script/lib/List"
+# List   = require "factor_script/lib/List"
 helpers = require "factor_script/lib/test/default"
 
 new_code = helpers.new_code
