@@ -3,6 +3,7 @@ h      = require 'factor_script/lib/helpers'
 assert = require 'assert'
 _      = require 'underscore'
 objs   = require 'factor_script/lib/Objects'
+fs     = require 'factor_script'
 
 describe "Helpers: Copy", () ->
 
@@ -45,15 +46,11 @@ describe "Helpers: Copy", () ->
   describe 'Factor Script objects', () ->
 
     it "does not copy FS box", () ->
-      f = () ->
-        this.vals = ['a']
-        this
-      f.prototype.is_box = true
-
-      o = new f()
+      o = new fs.Box("")
+      o.Returns.is_orig = "original"
       c = h.copy(o)
-      o.vals.pop()
-      assert.deepEqual c, o
+      c.Returns.is_orig = "new orig"
+      assert.deepEqual c.Returns.is_orig, "new orig"
 
     it "shallow copys 'function lists'", () ->
       o = new objs.Factor_Script_Object
