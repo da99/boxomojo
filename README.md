@@ -17,9 +17,9 @@ Installation:
 
     javascript psuedo code>
 
-      Factor_Script = require 'factor_script'
+      factor_script = require 'factor_script'
 
-      machine = new Factor_Script.Machine """
+      box = new factor_script.Box """
 
         ***
           This is a comment.
@@ -48,7 +48,7 @@ Installation:
                     and the last value is returned.
                     It is equivalent to: run { }
 
-              { }   Anonymous function. 
+              { }   Anonymous function.
                     Factor uses the [ ] brackets.
                     Factor_Script uses { } brackets.
 
