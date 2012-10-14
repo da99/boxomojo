@@ -19,8 +19,8 @@ to_run_now_func = (o) ->
   Parse.To_Run_Now_Function(o)
 to_func = (o) ->
   Parse.To_Function(o)
-to_kv_list = (o) ->
-  Parse.To_KV_List(o)
+to_index = (o) ->
+  Parse.To_Index(o)
 to_list = (o) ->
   Parse.To_List(o)
 
@@ -91,7 +91,7 @@ describe "Parse ( )", () ->
 
 describe "Parse { }", () ->
 
-  it "separates { } as a Hash", () ->
+  it "separates { } as a Function", () ->
     result = parse """
       "Var" is: { z x c }
     """
@@ -110,17 +110,17 @@ describe 'Parse [ ]', () ->
     ]
 
 
-describe 'Parse k[ ]k', () ->
+describe 'Parse ~[ ]~', () ->
 
-  it 'separates k[ ]k as a KV List', () ->
-    result = parse ' "Var" is: k[ d e f ]k '
+  it 'separates ~[ ]~ as an Index', () ->
+    result = parse ' "Var" is: ~[ d e f ]~ '
     assert.deepEqual result, [ "Var", to_verb("is:"),
-      to_kv_list( [to_verb('d'), to_verb('e'), to_verb('f')] )
+      to_index( [to_verb('d'), to_verb('e'), to_verb('f')] )
     ]
 
 describe "Parse nesting blocks", () ->
 
-  it "separates nested ( { } ) as a Hash", () ->
+  it "parses ( { } ) as a Function within a Run Now Function", () ->
     result = parse """
       "Var" is:  ( { "a" "b" "c" } { "d" "e" "f" } )
     """
@@ -135,16 +135,16 @@ describe "Parse nesting blocks", () ->
     ]
     assert.deepEqual result, target
 
-  it 'separates nested ( { } k[ k[  ]k ]k ) as a Hash', () ->
-    result = parse ' "Var" is:  ( { "a" "b" "c" } k[ d k[ "O" is: "a" ]k b c ]k ) '
+  it 'separates nested ( { } ~[ ~[  ]~ ]~ ) as a Hash', () ->
+    result = parse ' "Var" is:  ( { "a" "b" "c" } ~[ d ~[ "O" is: "a" ]~ b c ]~ ) '
     target = [
       "Var",
       to_verb("is:"),
       to_run_now_func([
         to_func(['a','b','c']),
-        to_kv_list([
+        to_index([
           to_verb('d'),
-          to_kv_list(['O', to_verb('is:'), 'a']),
+          to_index(['O', to_verb('is:'), 'a']),
             to_verb('b'),
             to_verb('c')
         ])
@@ -157,7 +157,7 @@ describe "Parse nesting blocks", () ->
     err = null
     try
       parse """
-        Var is:  ( { 1 2 3 ) k[ 4 5 6 ] )
+        Var is:  ( { 1 2 3 ) ~[ 4 5 6 ] )
       """
     catch e
       err = e
