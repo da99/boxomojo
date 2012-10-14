@@ -21,6 +21,8 @@ to_func = (o) ->
   Parse.To_Function(o)
 to_index = (o) ->
   Parse.To_Index(o)
+to_object = (o) ->
+  Parse.To_Object(o)
 to_list = (o) ->
   Parse.To_List(o)
 
@@ -116,6 +118,14 @@ describe 'Parse ~[ ]~', () ->
     result = parse ' "Var" is: ~[ d e f ]~ '
     assert.deepEqual result, [ "Var", to_verb("is:"),
       to_index( [to_verb('d'), to_verb('e'), to_verb('f')] )
+    ]
+
+describe 'Parse +[ ]+', () ->
+
+  it 'separates +[ ]+ as an Object', () ->
+    result = parse ' "Var" is: +[ d e f ]+ '
+    assert.deepEqual result, [ "Var", to_verb("is:"),
+      to_object( [to_verb('d'), to_verb('e'), to_verb('f')] )
     ]
 
 describe "Parse nesting blocks", () ->
