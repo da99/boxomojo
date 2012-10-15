@@ -49,36 +49,36 @@ describe( '.run()', function () {
 
 describe( 'Base variables create', function () {
 
-  it('saves variable to stack',  function () {
+  it('saves variable to Returns stack',  function () {
 
     var s = new_code(' "One" is: 1 ');
     s.run();
-    assert.deepEqual(s.stack(), [ num('1') ]);
+    assert.deepEqual(s.Returns, [ 1 ]);
   });
 
   it( 'saves variables to w{}s',  function () {
 
     var s = new_code(' "One" is: 1 ');
     s.run();
-    assert.deepEqual(s.stack('Local Vars'), { 'One': num('1')} );
+    assert.deepEqual(s.Vars, { 'One': 1} );
 
   });
 
 }); // === describe
 
 
-describe('Stack', function () {
+describe('Returns', function () {
 
   it( 'adds numbers to stack',  function () {
     var s = new_code(' 1 2 3 ');
     s.run();
-    assert.deepEqual(s.stack(), [ num('1'), num('2'), num('3') ]);
+    assert.deepEqual(s.Returns, [ 1, 2, 3 ]);
   });
 
   it( 'adds quoted strings to stack',  function () {
     var s = new_code(' "a"  "long string" "c" ');
     s.run();
-    assert.deepEqual(s.stack(), [ str('a'), str('long string'), str('c') ]);
+    assert.deepEqual(s.Returns, [ 'a', 'long string', 'c' ]);
   });
 
 }); // === describe
