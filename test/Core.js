@@ -29,6 +29,30 @@ describe( 'Core', function () {
 
   }); // === describe
 
+  describe( '/', function () {
+
+    it( 'divides numbers', function () {
+      assert.equal( _.last(returns(' 1 / 2 / 3 ')), (1 / 2 / 3));
+    });
+
+  }); // === describe
+
+  describe( '*', function () {
+
+    it( 'multiplies numbers', function () {
+      assert.equal( _.last(returns(' 1 * 2 * 3 ')), (1 * 2 * 3));
+    });
+
+  }); // === describe
+
+  describe( '/.', function () {
+
+    it( 'acts as a modulus', function () {
+      assert.equal( _.last(returns(' 5 /. 3 ')), (5 % 3));
+    });
+
+  }); // === describe
+
   describe( '<_', function () {
     it( 'adds a shortcut to previous item on the stack', function () {
       assert.deepEqual( returns(' 5 <_ "five" <_ '), [ 5, 5, "five", "five" ] );
