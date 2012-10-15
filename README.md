@@ -54,8 +54,10 @@ Installation:
 
               [ ]   A numbered list. Known as Array in other languages.
 
-             k[ ]k  A stringed list. Like an Array, but with strings as indexes.
+             ~[ ]~  An index. Like an Array, but with strings as indexes.
                     Known as Hash, key-value data structure in other languages.
+
+             +[ ]+  An object.
 
               "s"   String. Delimiters:  " "
     s[my string]s   String. Delimiters: s[ ]s
@@ -77,11 +79,11 @@ Installation:
         "Optional Commas" is: [ 0 , 1 , 2 ]
         "Adding Arrays" is:   [ 1 2 3 ] + [ 4 5 6 ]
 
-        "Number Names" is: k[
+        "Number Names" is: ~[
           "Zero" is: 0
           "One"  is: 1
           "Two"  is: 2
-        ]k
+        ]~
 
         ^<- "New Function"
            { "str" string? } "to-number" { }
@@ -93,6 +95,8 @@ Installation:
 
       """
 
+      box.run();
+      box.Returns;
 
 
 
