@@ -56,26 +56,26 @@ describe( 'Base variables create', function () {
     assert.deepEqual(s.Returns, [ 1 ]);
   });
 
-  it( 'saves variables to w{}s',  function () {
+  it( 'saves variables to Vars',  function () {
 
     var s = new_code(' "One" is: 1 ');
     s.run();
-    assert.deepEqual(s.Vars, { 'One': 1} );
+    assert.deepEqual(s.Vars, { 'One': 1 } );
 
   });
 
 }); // === describe
 
 
-describe('Returns', function () {
+describe('.Returns', function () {
 
-  it( 'adds numbers to stack',  function () {
+  it( 'gathers numbers',  function () {
     var s = new_code(' 1 2 3 ');
     s.run();
     assert.deepEqual(s.Returns, [ 1, 2, 3 ]);
   });
 
-  it( 'adds quoted strings to stack',  function () {
+  it( 'gathers quoted strings',  function () {
     var s = new_code(' "a"  "long string" "c" ');
     s.run();
     assert.deepEqual(s.Returns, [ 'a', 'long string', 'c' ]);
