@@ -4,9 +4,7 @@ var assert  = require('assert'),
     h       = require("factor_script/lib/test/default"),
     Parse   = require('factor_script/lib/Parse');
 
-var new_code = h.new_code,
-    num      = h.num,
-    str      = h.str;
+var new_code = h.new_code;
 
 describe("New", function () {
 
