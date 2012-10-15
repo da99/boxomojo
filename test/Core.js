@@ -20,6 +20,15 @@ describe( 'Core', function () {
     });
   }); // === describe
 
+
+  describe( '-', function () {
+
+    it( 'subtracts numbers', function () {
+      assert.equal( _.last(returns(' 1 - 2 - 3 ')), (1 - 2 - 3));
+    });
+
+  }); // === describe
+
   describe( '<_', function () {
     it( 'adds a shortcut to previous item on the stack', function () {
       assert.deepEqual( returns(' 5 <_ "five" <_ '), [ 5, 5, "five", "five" ] );
