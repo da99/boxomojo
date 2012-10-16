@@ -13,13 +13,13 @@ describe("Objects: +[ ]+", function () {
     it("allows keys", function () {
 
       var str = '  \
-        "Var" is: +[              \
+        "My_Obj" is: +[              \
           "name" is: "LIST" ,     \
           "city" is: "Hong Kong"  \
         ]+ \
       ';
 
-      assert.deepEqual(vars(str).Var, {
+      assert.deepEqual(vars(str).My_Obj.Vars, {
         name: "LIST",
         city: "Hong Kong",
       });
@@ -30,13 +30,13 @@ describe("Objects: +[ ]+", function () {
       var str = ' \
         "Uno" is: "uno" \
         "One" is: "one" \
-        "Var" is: +[     \
+        "My_Obj" is: +[     \
           "name" is: Uno \
           "nick" is: One \
         ]+ \
       ';
 
-      assert.deepEqual(vars(str).Var, {
+      assert.deepEqual(vars(str).My_Obj.Vars, {
         name: "uno",
         nick: "one"
       });
