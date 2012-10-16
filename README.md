@@ -60,10 +60,10 @@ Installation:
              +[ ]+  An object.
 
               "s"   String. Delimiters:  " "
-    s[my string]s   String. Delimiters: s[ ]s
+             &[ ]&  String. Exampe:  &[ my "crazy" $!@#%^&* 'string' ]&
 
      "^"string"^"   String escaping: ^"   "^
-    s[ ^s[ ]s^ ]s   String escaping: ^s[ ]s^
+    &[ ^&[ ]&^ ]&   String escaping: ^&[ ]&^
 
         ***
 

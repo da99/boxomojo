@@ -57,17 +57,17 @@ describe "Parse Strings", () ->
 
     assert.deepEqual result, [to_verb("Var"), to_verb("is:"), 'This sentence with ^"start and end!"^']
 
-  it "parse s[ ]s as a string", () ->
+  it "parse &[ ]& as a string", () ->
     result = parse """
-      "One" is: s["This sentence."]s
+      "One" is: &["This sentence."]&
     """
     assert.deepEqual result, ["One", to_verb("is:"), '"This sentence."' ]
 
-  it "escapes ^s[ ]s^ with s[ ]s strings", () ->
+  it "escapes ^&[ ]&^ with &[ ]& strings", () ->
     result = parse """
-      "One" is: s[This ^s[sentence]s^.]s
+      "One" is: &[This ^&[sentence]&^.]&
     """
-    assert.deepEqual result, ["One", to_verb("is:"), 'This s[sentence]s.' ]
+    assert.deepEqual result, ["One", to_verb("is:"), 'This &[sentence]&.' ]
 
 describe "Parse Numbers", () ->
 
