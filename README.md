@@ -60,7 +60,7 @@ Installation:
              +[ ]+  An object.
 
               "s"   String. Delimiters:  " "
-             &[ ]&  String. Exampe:  &[ my "crazy" $!@#%^&* 'string' ]&
+             &[ ]&  String. Example:  &[ my "crazy" $!@#%^&* 'string' ]&
 
      "^"string"^"   String escaping: ^"   "^
     &[ ^&[ ]&^ ]&   String escaping: ^&[ ]&^
