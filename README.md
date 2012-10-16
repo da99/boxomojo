@@ -15,88 +15,90 @@ Installation:
 
     shell> npm install factor_script
 
-    javascript psuedo code>
+Use:
+-----------------------
+In a string or a file:
 
-      factor_script = require 'factor_script'
+    ***
+      This is a comment.
+      This does not place anything on the stack.
+      Anything between the pair of "***" is dropped.
+    ***
 
-      box = new factor_script.Box """
-
-        ***
-          This is a comment.
-          This does not place anything on the stack.
-          Anything between the pair of "***" is dropped.
-        ***
-
-        *** Calculation ***
-        1 + 2 + 3
+    *** Calculation ***
+    1 + 2 + 3
 
 
-        ***
-          Defining a variable:
-            In other words: place the string, "One", on a stack.
-            execute "is:" as a function that grabs the previous
-            item, "One", and the proceding item, the number 1.
-            Save as a variable.
-        ***
+    ***
+      Defining a variable:
+        In other words: place the string, "One", on a stack.
+        execute "is:" as a function that grabs the previous
+        item, "One", and the proceding item, the number 1.
+        Save as a variable.
+    ***
 
-        "My-Var" is: 100
+    "My-Var" is: 100
 
 
-        ***
+    ***
 
-              ( )   Anything between the parenthesis is run in a separete stack
-                    and the last value is returned.
-                    It is equivalent to: run { }
+          ( )   Anything between the parenthesis is run in a separete stack
+                and the last value is returned.
+                It is equivalent to: run { }
 
-              { }   Anonymous function.
-                    Factor uses the [ ] brackets.
-                    Factor_Script uses { } brackets.
+          { }   Anonymous function.
+                Factor uses the [ ] brackets.
+                Factor_Script uses { } brackets.
 
-              [ ]   A numbered list. Known as Array in other languages.
+          [ ]   A numbered list. Known as Array in other languages.
 
-             ~[ ]~  An index. Like an Array, but with strings as indexes.
-                    Known as Hash, key-value data structure in other languages.
+         ~[ ]~  An index. Like an Array, but with strings as indexes.
+                Known as Hash, key-value data structure in other languages.
 
-             +[ ]+  An object.
+         +[ ]+  An object.
 
-              "s"   String. Delimiters:  " "
-             &[ ]&  String. Example:  &[ my "crazy" $!@#%^&* 'string' ]&
+          "s"       String. Delimiters:  " "
+         &[ ]&      String. Example:  &[ my "crazy" $!@#%^&* 'string' ]&
 
      "^"string"^"   String escaping: ^"   "^
     &[ ^&[ ]&^ ]&   String escaping: ^&[ ]&^
 
-        ***
+    ***
 
-        "One" is: 1
+    "One" is: 1
 
-        if ( One == 1 ) {
-          "Result" is: "it works"
-        } else {
-          "Result" is: "Factor_Script does not work"
-        }
+    if ( One == 1 ) {
+      "Result" is: "it works"
+    } else {
+      "Result" is: "Factor_Script does not work"
+    }
 
-        "Array" is:           [ 0 1 2 3 4 ]
-        "Optional Commas" is: [ 0 , 1 , 2 ]
-        "Adding Arrays" is:   [ 1 2 3 ] + [ 4 5 6 ]
+    "Array" is:           [ 0 1 2 3 4 ]
+    "Optional Commas" is: [ 0 , 1 , 2 ]
+    "Adding Arrays" is:   [ 1 2 3 ] + [ 4 5 6 ]
 
-        "Number Names" is: ~[
-          "Zero" is: 0
-          "One"  is: 1
-          "Two"  is: 2
-        ]~
+    "Number Names" is: ~[
+      "Zero" is: 0
+      "One"  is: 1
+      "Two"  is: 2
+    ]~
 
-        ^<- "New Function"
-           { "str" string? } "to-number" { }
-           ==> { number? }
-           { ^<- "Number Names" <- str }
+    ^<- "New Function"
+       { "str" string? } "to-number" { }
+       ==> { number? }
+       { ^<- "Number Names" <- str }
 
 
-        "Zero" to-number
+    "Zero" to-number
 
-      """
+In your JavaScript code:
 
-      box.run();
-      box.Returns;
+
+    var factor_script = require('factor_script');
+    var box = new factor_script.Box( YOUR_FACTOR_SCRIPT_STRING );
+    box.run();
+    box.Returns;  // ===> Returns an Array. Treat it as a stack.
+    box.Vars;     // ===> Returns an Object (aka Hash).
 
 
 
