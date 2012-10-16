@@ -9,50 +9,6 @@ var new_code = h.new_code,
 
 describe( 'Core', function () {
 
-  describe( '+', function () {
-    it( 'adds numbers', function () {
-      assert.equal( _.last(returns(' 1 + 2 + 3 ')), 6);
-    });
-
-    it( 'adds lists', function () {
-      var v = _.last(returns(' [ 1 2 3 ] + [ 4 5 6 ] '));
-      assert.deepEqual( v.Returns, [ 1,2,3,4,5,6 ] );
-    });
-  }); // === describe
-
-
-  describe( '-', function () {
-
-    it( 'subtracts numbers', function () {
-      assert.equal( _.last(returns(' 1 - 2 - 3 ')), (1 - 2 - 3));
-    });
-
-  }); // === describe
-
-  describe( '/', function () {
-
-    it( 'divides numbers', function () {
-      assert.equal( _.last(returns(' 1 / 2 / 3 ')), (1 / 2 / 3));
-    });
-
-  }); // === describe
-
-  describe( '*', function () {
-
-    it( 'multiplies numbers', function () {
-      assert.equal( _.last(returns(' 1 * 2 * 3 ')), (1 * 2 * 3));
-    });
-
-  }); // === describe
-
-  describe( '/.', function () {
-
-    it( 'acts as a modulus', function () {
-      assert.equal( _.last(returns(' 5 /. 3 ')), (5 % 3));
-    });
-
-  }); // === describe
-
   describe( '<_', function () {
     it( 'adds a shortcut to previous item on the stack', function () {
       assert.deepEqual( returns(' 5 <_ "five" <_ '), [ 5, 5, "five", "five" ] );

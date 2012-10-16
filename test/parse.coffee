@@ -14,7 +14,7 @@ parse = (code) ->
   p.tokens
 
 to_verb = (str) ->
-  { 'verb?' : true, 'value' : str }
+  { 'raw?' : true, tokens: [str], 'function call?' : true, 'kind' : 'function call', value : str }
 to_run_now_func = (o) ->
   Parse.To_Run_Now_Function(o)
 to_func = (o) ->

@@ -52,15 +52,15 @@ describe "Helpers: Copy", () ->
       c.Returns.is_orig = "new orig"
       assert.deepEqual c.Returns.is_orig, "new orig"
 
-    it "shallow copys 'function lists'", () ->
-      o = new objs.Factor_Script_Object
+    it "shallow copys 'Modules'", () ->
+      o = new objs.List []
       a = ['a']
       a._id = 2
-      o['Function Lists'].push a
+      o['Modules'].push a
       c = h.copy(o)
       a.push 'b'
 
-      assert.deepEqual _.last(c['Function Lists']), a
+      assert.deepEqual _.last(c['Modules']), a
 
 
 
