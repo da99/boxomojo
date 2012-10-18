@@ -37,6 +37,12 @@ describe "Parse", () ->
 
 describe "Parse Strings", () ->
 
+  it 'parses strings with surrounding spaces: " a "', () ->
+    result = parse """
+      " a "
+    """
+    assert.deepEqual result, [' a ']
+
   it "keeps strings together", () ->
     result = parse """
       "One" is: "This sentence."
