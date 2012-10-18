@@ -23,10 +23,19 @@ describe( 'Comments', function () {
       assert.deepEqual( returns(str), [1] );
     });
 
-    it( 'allowed in strings', function () {
+    it( 'does not get ignored in strings', function () {
       var target = " #!!!\nThis gets ignored.\n!!! ";
       var str = '"' + target + '"';
       assert.deepEqual(returns(str), [target]);
+    });
+
+    it( 'ignores valid factor_script code in comments', function () {
+      var str = '           \
+        #!!!                \
+        [ 1 ]               \
+        !!!                 \
+      ';
+      assert.deepEqual( returns(str), [ ] );
     });
 
   }); // === describe
@@ -37,11 +46,17 @@ describe( 'Comments', function () {
       assert.deepEqual( returns(str), [5] );
     });
 
-    it( 'allowed in strings', function () {
+    it( 'does not get ignored in strings', function () {
       var target = " #! This gets ignored. ";
       var str = '"' + target + '"';
       assert.deepEqual(returns(str), [target]);
     });
+
+    it( 'ignores valid factor_script code in comments', function () {
+      var str = ' #! [ 1 ] ';
+      assert.deepEqual( returns(str), [ ] );
+    });
+
   }); // === describe
 
   describe( 'Single-line', function () {

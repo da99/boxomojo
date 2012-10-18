@@ -22,11 +22,13 @@ In a string or a file:
     #!!!
       This is a comment.
       This does not place anything on the stack.
-      Anything between the pair of "***" is dropped.
+      Anything between the pair of "#!!!/!!!" is dropped
+      during parsing.
     !!!
 
-    #! This is also another comment. It ends
-    #! at the end of the line.
+    #! This is also another comment.
+    #! It ends at the end of the line.
+    #! It gets dropped during parsing, just like #!!! !!!
     #! Note the space: "#!_Note_the_space"
 
     #! Calculation
