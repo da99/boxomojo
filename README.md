@@ -19,28 +19,32 @@ Use:
 -----------------------
 In a string or a file:
 
-    ***
+    #!!!
       This is a comment.
       This does not place anything on the stack.
       Anything between the pair of "***" is dropped.
-    ***
+    !!!
 
-    *** Calculation ***
+    #! This is also another comment. It ends
+    #! at the end of the line.
+    #! Note the space: "#!_Note_the_space"
+
+    #! Calculation
     1 + 2 + 3
 
 
-    ***
+    #!!!
       Defining a variable:
         In other words: place the string, "One", on a stack.
         execute "is:" as a function that grabs the previous
         item, "One", and the proceding item, the number 1.
         Save as a variable.
-    ***
+    !!!
 
     "My-Var" is: 100
 
 
-    ***
+    #!!!
 
           ( )   Anything between the parenthesis is run in a separete stack
                 and the last value is returned.
@@ -63,7 +67,10 @@ In a string or a file:
      "^"string"^"   String escaping: ^"   "^
     &[ ^&[ ]&^ ]&   String escaping: ^&[ ]&^
 
-    ***
+        [<>]    Inside box. Known as "local scope" in other languages.
+        <[]>    Outside box. 
+
+    !!!
 
     "One" is: 1
 
@@ -83,10 +90,11 @@ In a string or a file:
       "Two"  is: 2
     ]~
 
-    ^<- "New Function"
+    [<>] <-+
        { "str" string? } "to-number" { }
-       ==> { number? }
-       { ^<- "Number Names" <- str }
+       { number? }
+       { [<>] get "Number Names" get str }
+     +->
 
 
     "Zero" to-number
