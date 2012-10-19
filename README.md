@@ -22,7 +22,7 @@ In a string or a file:
     #!!!
       This is a comment.
       This does not place anything on the stack.
-      Anything between the pair of "#!!!/!!!" is dropped
+      Anything between "#!!!", "!!!" is dropped
       during parsing.
     !!!
 
@@ -37,10 +37,10 @@ In a string or a file:
 
     #!!!
       Defining a variable:
-        In other words: place the string, "One", on a stack.
-        execute "is:" as a function that grabs the previous
+        1) In other words: place the string, "One", on a stack.
+        2) Execute "is:" as a function that grabs the previous
         item, "One", and the proceding item, the number 1.
-        Save as a variable.
+        3) Save as a variable.
     !!!
 
     "My-Var" is: 100
@@ -56,10 +56,11 @@ In a string or a file:
                 Factor uses the [ ] brackets.
                 Factor_Script uses { } brackets.
 
-          [ ]   A numbered list. Known as Array in other languages.
+          [ ]   A list. Known as Array in other languages.
 
-         ~[ ]~  An index. Like an Array, but with strings as indexes.
-                Known as Hash, key-value data structure in other languages.
+         ~[ ]~  An index. Like an Array, but with string keys instead of
+                numerical positions.
+                Known as a Hash or key-value data structure in other languages.
 
          +[ ]+  An object.
 
@@ -70,7 +71,7 @@ In a string or a file:
     &[ ^&[ ]&^ ]&   String escaping: ^&[ ]&^
 
         [<>]    Inside box. Known as "local scope" in other languages.
-        <[]>    Outside box. 
+        ^[]^    Outside box.
 
     !!!
 
@@ -92,11 +93,11 @@ In a string or a file:
       "Two"  is: 2
     ]~
 
-    [<>] <-+
+    [<>] <+[
        { "str" string? } "to-number" { }
        { number? }
        { [<>] get "Number Names" get str }
-     +->
+     ]+>
 
 
     "Zero" to-number
