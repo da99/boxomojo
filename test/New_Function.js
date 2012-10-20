@@ -85,14 +85,14 @@ describe( 'New Function errors: ', function () {
   });
 
   it( 'throws error if returning values do not pass', function () {
-    var str = ' [<>] <+[ { } "++" { } { string? } { 5 } ]+> ++ ';
+    var str = ' [<>] <+[ { } "++" { } { string? string? } { 5 5 } ]+> ++ ';
     var err = null;
     try {
       returns(str);
     } catch (e) {
       err = e
     };
-    assert.equal(err.message, "++: returning value must be a string?: 5");
+    assert.equal(err.message, "++: returned values do not match requirements: 5 5 => string? string?");
   });
 }); // === describe
 
