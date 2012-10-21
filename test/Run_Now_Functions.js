@@ -15,8 +15,13 @@ describe( 'Run Now Functions', function () {
     assert.deepEqual( returns(str), [3] );
   });
 
+  it( 'sets [<>] to ^[]^', function () {
+    var str = ' ( [<>] <+ "One" , "Neo" ) ';
+    assert.deepEqual( vars(str).One, "Neo" );
+  });
+
   it( 'saves vars to Outside box', function () {
-    var str = ' ( "One" is: "Neo" ) ';
+    var str = ' ( "One" = "Neo" ) ';
     assert.deepEqual( vars(str).One, "Neo" );
   });
 }); // === describe

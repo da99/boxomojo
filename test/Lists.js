@@ -14,7 +14,7 @@ describe( 'Lists: [ ]', function () {
   describe( 'syntax', function () {
 
     it("keeps a list of numerical indexes", function() {
-      var str = ' "Nums" is: [ 1 , 2 , 3 ] ';
+      var str = ' "Nums" = [ 1 , 2 , 3 ] ';
       assert.deepEqual(vars(str).Nums.Returns, [ 1, 2, 3 ] )
     });
 

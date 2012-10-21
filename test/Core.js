@@ -17,14 +17,14 @@ describe( 'Core', function () {
     });
 
     it( 'accepts functions in Core', function () {
-      var box = new_code(' "One" is: 1 [<>] get "One" ');
+      var box = new_code(' "One" = 1 [<>] get "One" ');
       box.run();
       assert.equal( _.last(box.Returns), 1 );
     });
 
     it( 'accepts functions in it\'s Functions list', function () {
       var box = new_code(' [<>] yoyo ');
-      box.Functions['yoyo'] = function (box) { 
+      box.Functions['yoyo'] = function (box) {
         box.respond("hiya");
         return true;
       };

@@ -18,7 +18,7 @@ describe( 'Comments', function () {
         #!!!                \
         This gets ignored.  \
         !!!                 \
-        "One" is: 1         \
+        "One" = 1           \
       ';
       assert.deepEqual( returns(str), [1] );
     });
@@ -62,7 +62,7 @@ describe( 'Comments', function () {
   describe( 'Single-line', function () {
 
     it( 'gets ignored', function () {
-      var str = ' #!!! Ignored !!! "Two" is: 2 '
+      var str = ' #!!! Ignored !!! "Two" = 2 '
       assert.deepEqual( returns(str), [2] );
     });
 

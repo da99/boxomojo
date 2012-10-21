@@ -17,7 +17,7 @@ describe( 'Functions', function () {
   });
 
   it( 'saves vars to Outside box', function () {
-    var str = ' run { "One" is: "Neo" } ';
+    var str = ' run { "One" = "Neo" } ';
     assert.deepEqual( vars(str).One, "Neo" );
   });
 }); // === describe

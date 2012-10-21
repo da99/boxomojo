@@ -12,12 +12,7 @@ describe("Objects: +[ ]+", function () {
 
     it("allows keys", function () {
 
-      var str = '  \
-        "My_Obj" is: +[              \
-          "name" is: "LIST" ,     \
-          "city" is: "Hong Kong"  \
-        ]+ \
-      ';
+      var str = ' "My_Obj" = +[ "name" = "LIST" , "city" = "Hong Kong" ]+ ';
 
       assert.deepEqual(vars(str).My_Obj.Vars, {
         name: "LIST",
@@ -28,13 +23,8 @@ describe("Objects: +[ ]+", function () {
     it('sets read env to outside', function () {
 
       var str = ' \
-        "Uno" is: "uno" \
-        "One" is: "one" \
-        "My_Obj" is: +[     \
-          "name" is: Uno \
-          "nick" is: One \
-        ]+ \
-      ';
+        "Uno" = "uno" , "One" = "one" \
+        "My_Obj" = +[ "name" = Uno , "nick" = One ]+ ';
 
       assert.deepEqual(vars(str).My_Obj.Vars, {
         name: "uno",

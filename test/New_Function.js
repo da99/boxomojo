@@ -12,7 +12,7 @@ describe( 'New Function', function () {
 
   it( 'creates a runnable function', function () {
     var str = '          \
-      "Obj" is: +[ ]+    \
+      "Obj" = +[ ]+    \
       <+[                \
         { } "++" { } { string? } \
         { "++" } \
@@ -24,7 +24,7 @@ describe( 'New Function', function () {
 
   it( 'defines new function in target object', function () {
     var str = '          \
-      "Obj" is: +[ ]+    \
+      "Obj" = +[ ]+    \
       <+[                \
         { } "++" { } { string? } \
         { "++" } \
@@ -52,7 +52,7 @@ describe( 'New Function', function () {
 
 describe( 'New Function errors: ', function () {
   it( 'throws error if backward stack is uneven', function () {
-    var str = ' "Obj" is: +[ ]+ <+[ { "name" } "++" { } { string? } { "++" } ]+>';
+    var str = ' "Obj" = +[ ]+ <+[ { "name" } "++" { } { string? } { "++" } ]+>';
     var err = null;
     try {
       returns(str);
@@ -63,7 +63,7 @@ describe( 'New Function errors: ', function () {
   });
 
   it( 'throws error if forward stack is uneven', function () {
-    var str = ' "Obj" is: +[ ]+ <+[ { } "++" { "name" } { string? } { "++" } ]+>';
+    var str = ' "Obj" = +[ ]+ <+[ { } "++" { "name" } { string? } { "++" } ]+>';
     var err = null;
     try {
       returns(str);
@@ -74,7 +74,7 @@ describe( 'New Function errors: ', function () {
   });
 
   it( 'throws error if argument name is not a string', function () {
-    var str = ' "Obj" is: +[ ]+ <+[ { } "++" { 2 number? } { string? } { "++" } ]+>';
+    var str = ' "Obj" = +[ ]+ <+[ { } "++" { 2 number? } { string? } { "++" } ]+>';
     var err = null;
     try {
       returns(str);
@@ -99,7 +99,7 @@ describe( 'New Function errors: ', function () {
 describe( 'New Function Alias', function () {
   it( 'creates alias in object', function () {
     var str = '     \
-    "KV" is: ~[ ]~  \
+    "KV" = ~[ ]~  \
     KV "key" <=+=< "new_key"                            \
     KV <+[ { } "new_key" { } { string? }  \
            {  "new func called" }                            \

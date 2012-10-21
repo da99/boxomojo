@@ -38,12 +38,12 @@ In a string or a file:
     #!!!
       Defining a variable:
         1) In other words: place the string, "One", on a stack.
-        2) Execute "is:" as a function that grabs the previous
+        2) Execute "=" as a function that grabs the previous
         item, "One", and the proceding item, the number 1.
         3) Save as a variable.
     !!!
 
-    "My-Var" is: 100
+    "My-Var" = 100
 
 
     #!!!
@@ -75,22 +75,22 @@ In a string or a file:
 
     !!!
 
-    "One" is: 1
+    "One" = 1
 
     if ( One == 1 ) {
-      "Result" is: "it works"
+      "Result" = "it works"
     } else {
-      "Result" is: "Factor_Script does not work"
+      "Result" = "Factor_Script does not work"
     }
 
-    "Array" is:           [ 0 1 2 3 4 ]
-    "Optional Commas" is: [ 0 , 1 , 2 ]
-    "Adding Arrays" is:   [ 1 2 3 ] + [ 4 5 6 ]
+    "Array"           = [ 0 1 2 3 4 ]
+    "Optional Commas" = [ 0 , 1 , 2 ]
+    "Adding Arrays"   = [ 1 2 3 ] + [ 4 5 6 ]
 
-    "Number Names" is: ~[
-      "Zero" is: 0
-      "One"  is: 1
-      "Two"  is: 2
+    "Number Names" = ~[
+      "Zero" = 0
+      "One"  = 1
+      "Two"  = 2
     ]~
 
     [<>] <+[

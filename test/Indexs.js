@@ -13,9 +13,9 @@ describe( 'Indexs: ~[ ]~', function () {
     it("allows keys", function () {
 
       var str = '  \
-        "Var" is: ~[              \
-          "name" is: "LIST" ,     \
-          "city" is: "Hong Kong"  \
+        "Var" = ~[              \
+          "name" = "LIST" ,     \
+          "city" = "Hong Kong"  \
         ]~ \
       ';
 
@@ -27,11 +27,11 @@ describe( 'Indexs: ~[ ]~', function () {
 
   it('sets read env to outside', function () {
     var str = ' \
-      "Uno" is: "uno"  \
-      "One" is: "one"  \
-      "Var"  is: ~[    \
-        "name" is: Uno \
-        "nick" is: One \
+      "Uno" = "uno"  \
+      "One" = "one"  \
+      "Var"  = ~[    \
+        "name" = Uno \
+        "nick" = One \
       ]~ \
     ';
 
