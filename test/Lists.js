@@ -27,4 +27,11 @@ describe( 'Lists: [ ]', function () {
     });
   }); // === describe
 
+  describe( '][', function () {
+    it( 'merges values into Tokens stack', function () {
+      var c = new_code(" ][ [ 1 2 3 ] ")
+      c.run();
+      assert.deepEqual( c.Tokens, [1,2,3] );
+    });
+  }); // === describe
 }); // === describe

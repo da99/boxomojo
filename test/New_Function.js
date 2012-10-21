@@ -100,22 +100,21 @@ describe( 'New Function Alias', function () {
   it( 'creates alias in object', function () {
     var str = '     \
     "KV" is: ~[ ]~  \
-    KV "key" =+= "new_key"                            \
-    KV <+[ { } "new_key" { "A" string? } { string? }  \
-           {  A + " key" }                            \
+    KV "key" <=+=< "new_key"                            \
+    KV <+[ { } "new_key" { } { string? }  \
+           {  "new func called" }                            \
     ]+>                                               \
-    KV key "new" ';
-    assert.equal(_.last(returns(str)), "new key");
+    KV key ';
+    assert.equal(_.last(returns(str)), "new func called");
   });
 
   it( 'can create alias in [<>]', function () {
-    var str = ' \
-    [<>] <=+ "+" \
-      { "A" number? } "+five+" { "B" number? } { number? } \
-      { A + B + 5 } \
-    /+=>            \
-    5 + 5 ';
-    assert.equal(_.last(returns(str)), 15);
+    var str = '             \
+    [<>] "string?" <=+=< "+five+"          \
+    [<>] <+[ { } "+five+" { } { number? }  \
+    { 10 } ]+>   \
+    5 string? ';
+    assert.equal(_.last(returns(str)), 10);
   });
 }); // === describe
 
