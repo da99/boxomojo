@@ -28,10 +28,16 @@ describe( 'Lists: [ ]', function () {
   }); // === describe
 
   describe( '][', function () {
-    it( 'merges values into Tokens stack', function () {
-      var c = new_code("[ 1 2 3 ] ][ [<>] ")
+    it( 'prepends values into Tokens stack: list ][ box', function () {
+      var c = new_code("[ 1 2 3 ] ][ [<>] 4 5 6")
       c.run();
-      assert.deepEqual( c.Returns, [c, 1,2,3] );
+      assert.deepEqual( c.Returns, [c,1,2,3,4,5,6] );
+    });
+
+    it( 'appends values into Tokens stack: box ][ list', function () {
+      var c = new_code("[<>] ][ [ 1 2 3 ] 4 5 6")
+      c.run();
+      assert.deepEqual( c.Returns, [c,4,5,6,1,2,3] );
     });
   }); // === describe
 }); // === describe
