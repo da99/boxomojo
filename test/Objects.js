@@ -47,4 +47,6 @@ describe("Objects: +[ ]+", function () {
 
 }); // === describe
 
+describe( 'Objects', function () {
+}); // === describe
 

@@ -50,7 +50,7 @@ In a string or a file:
 
           ( )   Anything between the parenthesis is run in a separete stack
                 and the last value is returned.
-                It is equivalent to: run { }
+                It is equivalent to: run { [<>] update: ^[]^  }
 
           { }   Anonymous function.
                 Factor uses the [ ] brackets.
