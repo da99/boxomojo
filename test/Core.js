@@ -9,6 +9,27 @@ var new_code = h.new_code,
 
 describe( 'Core', function () {
 
+  describe( '=', function () {
+
+    it( 'raises error if name of variable is already a function name', function () {
+      var box = new_code(' "One" = "yoyo" ');
+      box.Functions['One'] = function (box) {
+        return true;
+      };
+
+      var err = null;
+
+      try {
+        box.run();
+      } catch (e) {
+        var err = e;
+      };
+
+      assert.equal( err.message, "<+: Var already created: One" );
+    });
+
+  }); // === describe
+
   describe( '[<>]', function () {
     it( 'puts itself on the stack', function () {
       var box = new_code("[<>]");
@@ -22,7 +43,7 @@ describe( 'Core', function () {
       assert.equal( _.last(box.Returns), 1 );
     });
 
-    it( 'accepts functions in it\'s Functions list', function () {
+    it( 'accepts functions if it\'s in the Functions list', function () {
       var box = new_code(' [<>] yoyo ');
       box.Functions['yoyo'] = function (box) {
         box.respond("hiya");
