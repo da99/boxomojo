@@ -8,15 +8,15 @@ var new_code = h.new_code,
     returns  = h.returns,
     vars     = h.vars;
 
-describe( 'Indexs: ~[ ]~', function () {
+describe( 'Indexs: u[ ]u', function () {
 
     it("allows keys", function () {
 
       var str = '  \
-        "Var" = ~[              \
+        "Var" = u[              \
           "name" = "LIST" ,     \
           "city" = "Hong Kong"  \
-        ]~ \
+        ]u \
       ';
 
       assert.deepEqual(vars(str).Var.Vars, {
@@ -29,10 +29,10 @@ describe( 'Indexs: ~[ ]~', function () {
     var str = ' \
       "Uno" = "uno"  \
       "One" = "one"  \
-      "Var"  = ~[    \
+      "Var" = u[    \
         "name" = Uno \
         "nick" = One \
-      ]~ \
+      ]u \
     ';
 
     assert.deepEqual(vars(str).Var.Vars, { name: 'uno', nick: 'one' } );

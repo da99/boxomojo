@@ -99,7 +99,7 @@ describe( 'New Function errors: ', function () {
 describe( 'New Function Alias', function () {
   it( 'creates alias in object', function () {
     var str = '     \
-    "KV" = ~[ ]~  \
+    "KV" = u[ ]u  \
     KV "key" <=+=< "new_key"                            \
     KV <+[ { } "new_key" { } { string? }  \
            {  "new func called" }                            \
