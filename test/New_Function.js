@@ -15,11 +15,11 @@ describe( 'New Function', function () {
       "Obj" = o[ ]o    \
       <+[                \
         { } "++" { } { string? } \
-        { "++" } \
+        { "+added+" } \
       ]+>        \
       Obj ++     \
     ';
-    assert.equal(_.last(returns(str)), '++');
+    assert.equal(_.last(returns(str)), '+added+');
   });
 
   it( 'defines new function in target object', function () {
