@@ -13,7 +13,7 @@ parse = (code) ->
   p.tokens
 
 to_verb = (str) ->
-  { 'raw?' : true, tokens: [str], ':)~?' : true, 'kind' : ':)~', value : str }
+  { 'raw?' : true, 'kind' : ':)~', tokens: [str], ':)~?' : true, value : str }
 to_run_now_func = (o) ->
   Parse.To_Run_Now_Function(o)
 to_func = (o) ->
@@ -117,19 +117,19 @@ describe 'Parse [ ]', () ->
     ]
 
 
-describe 'Parse ~[ ]~', () ->
+describe 'Parse u[ ]u', () ->
 
-  it 'separates ~[ ]~ as an Index', () ->
-    result = parse ' "Var" is: ~[ d e f ]~ '
-    assert.deepEqual result, [ "Var", to_verb("is:"),
+  it 'separates u[ ]u as an KV structure', () ->
+    result = parse ' "Var" = u[ d e f ]u '
+    assert.deepEqual result, [ "Var", to_verb("="),
       to_index( [to_verb('d'), to_verb('e'), to_verb('f')] )
     ]
 
-describe 'Parse +[ ]+', () ->
+describe 'Parse o[ ]o', () ->
 
-  it 'separates +[ ]+ as an Object', () ->
-    result = parse ' "Var" is: +[ d e f ]+ '
-    assert.deepEqual result, [ "Var", to_verb("is:"),
+  it 'separates o[ ]o as a Box', () ->
+    result = parse ' "Var" = o[ d e f ]o '
+    assert.deepEqual result, [ "Var", to_verb("="),
       to_object( [to_verb('d'), to_verb('e'), to_verb('f')] )
     ]
 
@@ -150,8 +150,8 @@ describe "Parse nesting blocks", () ->
     ]
     assert.deepEqual result, target
 
-  it 'separates nested ( { } ~[ ~[  ]~ ]~ ) as a Hash', () ->
-    result = parse ' "Var" is:  ( { "a" "b" "c" } ~[ d ~[ "O" is: "a" ]~ b c ]~ ) '
+  it 'separates nested ( { } u[ u[  ]u ]u ) as a Hash', () ->
+    result = parse ' "Var" is:  ( { "a" "b" "c" } u[ d u[ "O" is: "a" ]u b c ]u ) '
     target = [
       "Var",
       to_verb("is:"),
