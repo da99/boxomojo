@@ -8,7 +8,7 @@ var new_code = h.new_code,
     returns  = h.returns,
     vars     = h.vars;
 
-describe( 'Run Now Functions', function () {
+describe( '( ... )', function () {
 
   it( 'returns last value', function () {
     var str = ' ( 1 + 1 + 1 ) ';
