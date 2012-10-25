@@ -16,7 +16,7 @@ describe( 'New Function', function () {
     var str = '          \
       "Obj" = o[ ]o    \
       <+[                \
-        { } "++" { } { string? } \
+        { } "++" { } { ~~~? } \
         { } \
       ]+>        \
       Obj ++     \
@@ -27,14 +27,14 @@ describe( 'New Function', function () {
     } catch (e) {
       err = e;
     };
-    assert.equal(err.message, "++: returning inadequate number of values: [empty list] => string?" );
+    assert.equal(err.message, "++: returning inadequate number of values: [empty list] => ~~~?" );
   });
 
   it( 'creates a runnable function', function () {
     var str = '          \
       "Obj" = o[ ]o    \
       <+[                \
-        { } "++" { } { string? } \
+        { } "++" { } { ~~~? } \
         { "+added+" } \
       ]+>        \
       Obj ++     \
@@ -46,7 +46,7 @@ describe( 'New Function', function () {
     var str = '          \
       "Obj" = o[ ]o    \
       <+[                \
-        { } "++" { } { string? } \
+        { } "++" { } { ~~~? } \
         { "++" } \
       ]+>        \
       Obj ++     \
@@ -58,7 +58,7 @@ describe( 'New Function', function () {
     var str = '            \
       [<>]                 \
       <+[                  \
-        { } "++" { } { string? } \
+        { } "++" { } { ~~~? } \
         { "it works" } \
       ]+>        \
       ++ ';
@@ -72,7 +72,7 @@ describe( 'New Function', function () {
 
 describe( 'New Function errors: ', function () {
   it( 'throws error if backward stack is uneven', function () {
-    var str = ' "Obj" = o[ ]o <+[ { "name" } "++" { } { string? } { "++" } ]+>';
+    var str = ' "Obj" = o[ ]o <+[ { "name" } "++" { } { ~~~? } { "++" } ]+>';
     var err = null;
     try {
       returns(str);
@@ -83,7 +83,7 @@ describe( 'New Function errors: ', function () {
   });
 
   it( 'throws error if forward stack is uneven', function () {
-    var str = ' "Obj" = o[ ]o <+[ { } "++" { "name" } { string? } { "++" } ]+>';
+    var str = ' "Obj" = o[ ]o <+[ { } "++" { "name" } { ~~~? } { "++" } ]+>';
     var err = null;
     try {
       returns(str);
@@ -94,7 +94,7 @@ describe( 'New Function errors: ', function () {
   });
 
   it( 'throws error if argument name is not a string', function () {
-    var str = ' "Obj" = o[ ]o <+[ { } "++" { 2 number? } { string? } { "++" } ]+>';
+    var str = ' "Obj" = o[ ]o <+[ { } "++" { 2 number? } { ~~~? } { "++" } ]+>';
     var err = null;
     try {
       returns(str);
@@ -105,14 +105,14 @@ describe( 'New Function errors: ', function () {
   });
 
   it( 'throws error if returning values do not pass', function () {
-    var str = ' [<>] <+[ { } "++" { } { string? string? } { 5 5 } ]+> ++ ';
+    var str = ' [<>] <+[ { } "++" { } { ~~~? ~~~? } { 5 5 } ]+> ++ ';
     var err = null;
     try {
       returns(str);
     } catch (e) {
       err = e
     };
-    assert.equal(err.message, "++: returned values do not match requirements: 5 5 => string? string?");
+    assert.equal(err.message, "++: returned values do not match requirements: 5 5 => ~~~? ~~~?");
   });
 }); // === describe
 
@@ -121,7 +121,7 @@ describe( 'New Function Alias', function () {
     var str = '     \
     "KV" = u[ ]u  \
     KV "key" <=+=< "new_key"                            \
-    KV <+[ { } "new_key" { } { string? }  \
+    KV <+[ { } "new_key" { } { ~~~? }  \
            {  "new func called" }                            \
     ]+>                                               \
     KV key ';
@@ -130,10 +130,10 @@ describe( 'New Function Alias', function () {
 
   it( 'can create alias in [<>]', function () {
     var str = '             \
-    [<>] "string?" <=+=< "+five+"          \
+    [<>] "~~~?" <=+=< "+five+"          \
     [<>] <+[ { } "+five+" { } { #? }  \
     { 10 } ]+>   \
-    5 string? ';
+    5 ~~~? ';
     assert.equal(_.last(returns(str)), 10);
   });
 }); // === describe

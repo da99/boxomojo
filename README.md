@@ -58,11 +58,11 @@ In a string or a file:
 
           [ ]   A list. Known as Array in other languages.
 
-         ~[ ]~  An index. Like an Array, but with string keys instead of
+         u[ ]u  An index. Like an Array, but with string keys instead of
                 numerical positions.
                 Known as a Hash or key-value data structure in other languages.
 
-         +[ ]+  An object.
+         o[ ]o  An object.
 
           "s"       String. Delimiters:  " "
          &[ ]&      String. Example:  &[ my "crazy" $!@#%^&* 'string' ]&
@@ -87,15 +87,15 @@ In a string or a file:
     "Optional Commas" = [ 0 , 1 , 2 ]
     "Adding Arrays"   = [ 1 2 3 ] + [ 4 5 6 ]
 
-    "Number Names" = ~[
+    "Number Names" = u[
       "Zero" = 0
       "One"  = 1
       "Two"  = 2
-    ]~
+    ]u
 
     [<>] <+[
-       { "str" string? } "to-number" { }
-       { number? }
+       { "str" ~~~? } "to-number" { }
+       { #? }
        { [<>] get "Number Names" get str }
      ]+>
 
