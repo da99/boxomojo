@@ -10,6 +10,24 @@ var new_code = h.new_code,
 
 describe( 'New Function', function () {
 
+  it( 'raises error if return values length are unequal to return requirements length', function () {
+    var err = null;
+    try {
+    var str = '          \
+      "Obj" = o[ ]o    \
+      <+[                \
+        { } "++" { } { string? } \
+        { } \
+      ]+>        \
+      Obj ++     \
+    ';
+    new_code(str).run();
+    } catch (e) {
+      err = e;
+    };
+    assert.equal(err.message, "++: returning inadequate number of values. Requires: string?" );
+  });
+
   it( 'creates a runnable function', function () {
     var str = '          \
       "Obj" = o[ ]o    \

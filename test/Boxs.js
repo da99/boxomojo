@@ -6,7 +6,7 @@ var h    = require("factor_script/lib/test/default"),
 new_code = h.new_code,
 vars     = h.vars;
 
-describe("Objects: o[ ]o", function () {
+describe("Boxs: o[ ]o", function () {
 
   describe( 'syntax', function () {
 
@@ -38,7 +38,7 @@ describe("Objects: o[ ]o", function () {
   describe( 'modules', function () {
     it( 'adds base module', function () {
       var code = new_code(' o[ ]o ');
-      code.run;
+      code.run();
       assert.equal(code.Returns[0].Modules.length, 1);
     });
 
