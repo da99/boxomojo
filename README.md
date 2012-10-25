@@ -58,11 +58,7 @@ In a string or a file:
 
           [ ]   A list. Known as Array in other languages.
 
-         u[ ]u  An index. Like an Array, but with string keys instead of
-                numerical positions.
-                Known as a Hash or key-value data structure in other languages.
-
-         o[ ]o  An object.
+         o[ ]o  A box. Think of it a Hash/Dictionary that is also an object.
 
           "s"       String. Delimiters:  " "
          &[ ]&      String. Example:  &[ my "crazy" $!@#%^&* 'string' ]&
