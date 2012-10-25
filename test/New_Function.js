@@ -131,7 +131,7 @@ describe( 'New Function Alias', function () {
   it( 'can create alias in [<>]', function () {
     var str = '             \
     [<>] "string?" <=+=< "+five+"          \
-    [<>] <+[ { } "+five+" { } { number? }  \
+    [<>] <+[ { } "+five+" { } { #? }  \
     { 10 } ]+>   \
     5 string? ';
     assert.equal(_.last(returns(str)), 10);
