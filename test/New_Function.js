@@ -12,7 +12,7 @@ describe( 'New Function', function () {
 
   it( 'raises error if return values length are unequal to return requirements length', function () {
     var err = null;
-    try {
+
     var str = '          \
       "Obj" = o[ ]o    \
       <+[                \
@@ -21,11 +21,13 @@ describe( 'New Function', function () {
       ]+>        \
       Obj ++     \
     ';
-    new_code(str).run();
+
+    try {
+      new_code(str).run();
     } catch (e) {
       err = e;
     };
-    assert.equal(err.message, "++: returning inadequate number of values. Requires: string?" );
+    assert.equal(err.message, "++: returning inadequate number of values: [empty list] => string?" );
   });
 
   it( 'creates a runnable function', function () {
@@ -63,7 +65,7 @@ describe( 'New Function', function () {
     var box = new_code(str);
     box.run()
     assert.equal( !!box.Functions['++'], true );
-    assert.equal(_.last(box.Returns), "it works");
+    assert.equal( box.see_backward(), "it works");
   });
 
 }); // === describe

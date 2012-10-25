@@ -34,13 +34,13 @@ describe( 'Core', function () {
     it( 'puts itself on the stack', function () {
       var box = new_code("[<>]");
       box.run();
-      assert.equal( box, _.last(box.Returns) );
+      assert.equal( box, box.see_backward() );
     });
 
     it( 'accepts functions in Core', function () {
       var box = new_code(' "One" = 1 [<>] get "One" ');
       box.run();
-      assert.equal( _.last(box.Returns), 1 );
+      assert.equal( box.see_backward(), 1 );
     });
 
     it( 'accepts functions if it\'s in the Functions list', function () {
@@ -50,7 +50,7 @@ describe( 'Core', function () {
         return true;
       };
       box.run();
-      assert.equal( _.last(box.Returns), 'hiya' );
+      assert.equal( box.see_backward(), 'hiya' );
     });
   }); // === describe
 
