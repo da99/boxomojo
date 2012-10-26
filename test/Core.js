@@ -13,7 +13,7 @@ describe( 'Core', function () {
 
     it( 'raises error if name of variable is already a function name', function () {
       var box = new_code(' "One" = "yoyo" ');
-      box.Functions['One'] = function (box) {
+      box.Vars['One'] = function (box) {
         return true;
       };
 
@@ -45,7 +45,7 @@ describe( 'Core', function () {
 
     it( 'accepts functions if it\'s in the Functions list', function () {
       var box = new_code(' [<>] yoyo ');
-      box.Functions['yoyo'] = function (box) {
+      box.Vars['yoyo'] = function (box) {
         box.respond("hiya");
         return true;
       };

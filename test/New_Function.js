@@ -51,7 +51,7 @@ describe( 'New Function', function () {
       ]+>        \
       Obj ++     \
     ';
-    assert.equal( !!vars(str).Obj.Functions['++'].toString(), true);
+    assert.equal( !!vars(str).Obj.Vars['++'].toString(), true);
   });
 
   it( 'can define new function in [<>]', function () {
@@ -64,7 +64,7 @@ describe( 'New Function', function () {
       ++ ';
     var box = new_code(str);
     box.run()
-    assert.equal( !!box.Functions['++'], true );
+    assert.equal( !!box.Vars['++'], true );
     assert.equal( box.see_backward(), "it works");
   });
 
