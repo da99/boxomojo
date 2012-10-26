@@ -117,10 +117,10 @@ describe 'Parse [ ]', () ->
     ]
 
 
-describe 'Parse o[ ]o', () ->
+describe 'Parse x[ ]x', () ->
 
-  it 'separates o[ ]o as a Box', () ->
-    result = parse ' "Var" = o[ d e f ]o '
+  it 'separates x[ ]x as a Box', () ->
+    result = parse ' "Var" = x[ d e f ]x '
     assert.deepEqual result, [ "Var", to_verb("="),
       to_object( [to_verb('d'), to_verb('e'), to_verb('f')] )
     ]
@@ -142,8 +142,8 @@ describe "Parse nesting blocks", () ->
     ]
     assert.deepEqual result, target
 
-  it 'separates nested ( { } o[ o[  ]o ]o ) as a Hash', () ->
-    result = parse ' "Var" is:  ( { "a" "b" "c" } o[ d o[ "O" is: "a" ]o b c ]o ) '
+  it 'separates nested ( { } x[ x[  ]x ]x ) as a Hash', () ->
+    result = parse ' "Var" is:  ( { "a" "b" "c" } x[ d x[ "O" is: "a" ]x b c ]x ) '
     target = [
       "Var",
       to_verb("is:"),

@@ -14,7 +14,7 @@ describe( 'New Function', function () {
     var err = null;
 
     var str = '          \
-      "Obj" = o[ ]o    \
+      "Obj" = x[ ]x    \
       <+[                \
         { } "++" { } { ~~~? } \
         { } \
@@ -32,7 +32,7 @@ describe( 'New Function', function () {
 
   it( 'creates a runnable function', function () {
     var str = '          \
-      "Obj" = o[ ]o    \
+      "Obj" = x[ ]x    \
       <+[                \
         { } "++" { } { ~~~? } \
         { "+added+" } \
@@ -44,7 +44,7 @@ describe( 'New Function', function () {
 
   it( 'defines new function in target object', function () {
     var str = '          \
-      "Obj" = o[ ]o    \
+      "Obj" = x[ ]x    \
       <+[                \
         { } "++" { } { ~~~? } \
         { "++" } \
@@ -72,7 +72,7 @@ describe( 'New Function', function () {
 
 describe( 'New Function errors: ', function () {
   it( 'throws error if backward stack is uneven', function () {
-    var str = ' "Obj" = o[ ]o <+[ { "name" } "++" { } { ~~~? } { "++" } ]+>';
+    var str = ' "Obj" = x[ ]x <+[ { "name" } "++" { } { ~~~? } { "++" } ]+>';
     var err = null;
     try {
       returns(str);
@@ -83,7 +83,7 @@ describe( 'New Function errors: ', function () {
   });
 
   it( 'throws error if forward stack is uneven', function () {
-    var str = ' "Obj" = o[ ]o <+[ { } "++" { "name" } { ~~~? } { "++" } ]+>';
+    var str = ' "Obj" = x[ ]x <+[ { } "++" { "name" } { ~~~? } { "++" } ]+>';
     var err = null;
     try {
       returns(str);
@@ -94,7 +94,7 @@ describe( 'New Function errors: ', function () {
   });
 
   it( 'throws error if argument name is not a string', function () {
-    var str = ' "Obj" = o[ ]o <+[ { } "++" { 2 number? } { ~~~? } { "++" } ]+>';
+    var str = ' "Obj" = x[ ]x <+[ { } "++" { 2 number? } { ~~~? } { "++" } ]+>';
     var err = null;
     try {
       returns(str);
@@ -119,7 +119,7 @@ describe( 'New Function errors: ', function () {
 describe( 'New Function Alias', function () {
   it( 'creates alias in object', function () {
     var str = '     \
-    "KV" = o[ ]o  \
+    "KV" = x[ ]x  \
     KV "key" <=+=< "new_key"                            \
     KV <+[ { } "new_key" { } { ~~~? }  \
            {  "new func called" }                            \

@@ -58,7 +58,7 @@ In a string or a file:
 
           [ ]   A list. Known as Array in other languages.
 
-         o[ ]o  A box. Think of it a Hash/Dictionary that is also an object.
+         x[ ]x  A box. Think of it a Hash/Dictionary that is also an object.
 
           "s"       String. Delimiters:  " "
          &[ ]&      String. Example:  &[ my "crazy" $!@#%^&* 'string' ]&
