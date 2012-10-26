@@ -16,7 +16,7 @@ describe( '( ... )', function () {
   });
 
   it( 'sets [<>] to ^[]^', function () {
-    var str = ' ( [<>] <+ "One" , "Neo" ) ';
+    var str = ' ( [<>] <x "One" , "Neo" ) ';
     assert.deepEqual( vars(str).One, "Neo" );
   });
 

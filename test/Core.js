@@ -25,7 +25,7 @@ describe( 'Core', function () {
         var err = e;
       };
 
-      assert.equal( err.message, "<+: Var already created: One" );
+      assert.equal( err.message, "<x: Var already created: One" );
     });
 
   }); // === describe

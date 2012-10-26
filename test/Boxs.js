@@ -48,6 +48,30 @@ describe("Boxs: x[ ]x", function () {
     });
   }); // === describe
 
+  describe( '=o', function () {
+    it( 'adds name to "[ox]"', function () {
+      var code = new_code(' x[ "One" =o 1 ]x ');
+      code.run();
+      assert.equal(code.Returns[0]['[ox]'], "One");
+    });
+  }); // === describe
+
+  describe( '<ox', function () {
+
+    it( 'adds name to "[ox]"', function () {
+      var code = new_code(' "O" = x[ ]x <ox "One" 1');
+      code.run();
+      assert.deepEqual(code.Vars['O']['[ox]'], ["One"]);
+    });
+
+    it( 'adds var "', function () {
+      var code = new_code(' "V" = x[ ]x <ox "One" 1');
+      code.run();
+      assert.deepEqual(code.Vars['V']['[ox]'], ['One']);
+    });
+
+  }); // === describe
+
 }); // === describe
 
 
