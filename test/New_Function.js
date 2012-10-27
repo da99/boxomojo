@@ -13,12 +13,13 @@ describe( 'New Function', function () {
   it( 'raises error if return values length are unequal to return requirements length', function () {
     var err = null;
 
-    var str = '          \
+    var str = '        \
       "Obj" = x[ ]x    \
-      <+[                \
-        { } "++" { } { ~~~? } \
-        { } \
-      ]+>        \
+      <x "++" , ~{     \
+        { } { }   \
+        { ~~~? } \
+        { }      \
+      }~         \
       Obj ++     \
     ';
 
@@ -31,24 +32,26 @@ describe( 'New Function', function () {
   });
 
   it( 'creates a runnable function', function () {
-    var str = '          \
+    var str = '        \
       "Obj" = x[ ]x    \
-      <+[                \
-        { } "++" { } { ~~~? } \
-        { "+added+" } \
-      ]+>        \
-      Obj ++     \
+      <x "++" , ~{     \
+        { }  { }       \
+        { ~~~? }       \
+        { "+added+" }  \
+      }~               \
+      Obj ++           \
     ';
     assert.equal(_.last(returns(str)), '+added+');
   });
 
   it( 'defines new function in target object', function () {
     var str = '          \
-      "Obj" = x[ ]x    \
-      <+[                \
-        { } "++" { } { ~~~? } \
+      "Obj" = x[ ]x      \
+      <x "++" , ~{       \
+        { } { }          \
+        { ~~~? } \
         { "++" } \
-      ]+>        \
+      }~         \
       Obj ++     \
     ';
     assert.equal( !!vars(str).Obj.Vars['++'].toString(), true);
@@ -57,10 +60,11 @@ describe( 'New Function', function () {
   it( 'can define new function in [<>]', function () {
     var str = '            \
       [<>]                 \
-      <+[                  \
-        { } "++" { } { ~~~? } \
+      <x "++" , ~{         \
+        { } { }        \
+        { ~~~? }       \
         { "it works" } \
-      ]+>        \
+      }~               \
       ++ ';
     var box = new_code(str);
     box.run()
@@ -72,40 +76,40 @@ describe( 'New Function', function () {
 
 describe( 'New Function errors: ', function () {
   it( 'throws error if backward stack is uneven', function () {
-    var str = ' "Obj" = x[ ]x <+[ { "name" } "++" { } { ~~~? } { "++" } ]+>';
+    var str = ' "Obj" = x[ ]x <x "++" , ~{ { "name" } { } { ~~~? } { "++" } }~ ';
     var err = null;
     try {
       returns(str);
     } catch (e) {
       err = e;
     };
-    assert.equal(err.message, '<+[: Uneven number of parameters.')
+    assert.equal(err.message, '~{: Uneven number of parameters.')
   });
 
   it( 'throws error if forward stack is uneven', function () {
-    var str = ' "Obj" = x[ ]x <+[ { } "++" { "name" } { ~~~? } { "++" } ]+>';
+    var str = ' "Obj" = x[ ]x <x "++" , ~{ { } { "name" } { ~~~? } { "++" } }~ ';
     var err = null;
     try {
       returns(str);
     } catch (e) {
       err = e;
     };
-    assert.equal(err.message, '<+[: Uneven number of parameters.')
+    assert.equal(err.message, '~{: Uneven number of parameters.')
   });
 
   it( 'throws error if argument name is not a string', function () {
-    var str = ' "Obj" = x[ ]x <+[ { } "++" { 2 number? } { ~~~? } { "++" } ]+>';
+    var str = ' "Obj" = x[ ]x <x "++" ~{ { } { 2 number? } { ~~~? } { "++" } }~ ';
     var err = null;
     try {
       returns(str);
     } catch (e) {
       err = e;
     };
-    assert.equal(err.message, '<+[: Name of argument must be a string: 2')
+    assert.equal(err.message, '~{: Name of argument must be a string: 2')
   });
 
   it( 'throws error if returning values do not pass', function () {
-    var str = ' [<>] <+[ { } "++" { } { ~~~? ~~~? } { 5 5 } ]+> ++ ';
+    var str = ' [<>] <x "++" , ~{ { } { } { ~~~? ~~~? } { 5 5 } }~ ++ ';
     var err = null;
     try {
       returns(str);
@@ -118,21 +122,18 @@ describe( 'New Function errors: ', function () {
 
 describe( 'New Function Alias', function () {
   it( 'creates alias in object', function () {
-    var str = '     \
+    var str = '   \
     "KV" = x[ ]x  \
-    KV "key" <=+=< "new_key"                            \
-    KV <+[ { } "new_key" { } { ~~~? }  \
-           {  "new func called" }                            \
-    ]+>                                               \
+    KV "key" <=+=< "new_key" \
+    KV <x "new_key" , ~{ { } { } { ~~~? } {  "new func called" } }~ \
     KV key ';
     assert.equal(_.last(returns(str)), "new func called");
   });
 
   it( 'can create alias in [<>]', function () {
-    var str = '             \
-    [<>] "~~~?" <=+=< "+five+"          \
-    [<>] <+[ { } "+five+" { } { #? }  \
-    { 10 } ]+>   \
+    var str = '                                      \
+    [<>] "~~~?" <=+=< "+five+"                       \
+    [<>] <x "+five+" , ~{ { } { } { #? } { 10 }  }~  \
     5 ~~~? ';
     assert.equal(_.last(returns(str)), 10);
   });
