@@ -120,11 +120,12 @@ describe( 'New Function errors: ', function () {
   });
 }); // === describe
 
-describe( 'New Function Alias', function () {
+describe( 'New Function Call Route: <x=y', function () {
+
   it( 'creates alias in object', function () {
     var str = '   \
     "KV" = x[ ]x  \
-    KV "key" <=+=< "new_key" \
+    KV <x=y "key" "new_key" \
     KV <x "new_key" , ~{ { } { } { ~~~? } {  "new func called" } }~ \
     KV key ';
     assert.equal(_.last(returns(str)), "new func called");
@@ -132,10 +133,31 @@ describe( 'New Function Alias', function () {
 
   it( 'can create alias in [<>]', function () {
     var str = '                                      \
-    [<>] "~~~?" <=+=< "+five+"                       \
+    [<>] <x=y "~~~?" "+five+"                        \
     [<>] <x "+five+" , ~{ { } { } { #? } { 10 }  }~  \
     5 ~~~? ';
     assert.equal(_.last(returns(str)), 10);
   });
+
 }); // === describe
+
+describe( 'New Function Call Route: <x=~y', function () {
+
+  it( 'creates alias in object', function () {
+    var str = '   \
+    "KV" = x[ ]x  \
+    KV <x=~y "key" , "new_key" , ~{ { } { } { ~~~? } {  "new func called" } }~ \
+    KV key ';
+    assert.equal(_.last(returns(str)), "new func called");
+  });
+
+  it( 'can create alias in [<>]', function () {
+    var str = '                                      \
+    [<>] <x=~y "~~~?" , "+five+" , ~{ { } { } { #? } { 10 }  }~  \
+    5 ~~~? ';
+    assert.equal(_.last(returns(str)), 10);
+  });
+
+}); // === describe
+
 
