@@ -121,6 +121,17 @@ Commercial Break:
 <!-- http://www.amazon.com/dp/B00005JKEX/?tag=miniunicom-20 -->
 
 
+Advanced Features:
+=================
+
+* Function definitions:
+    [<>] <x "my_function" , ~{ { } { } { } { } }~
+
+* Function call routes: Called "Multiple Dispatching", "Function Overloading"
+  in other languages.
+    [<>] <x=y "my_function" , "new_function"
+
+
 Ending Credits:
 --------------
 
