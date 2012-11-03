@@ -8,7 +8,64 @@ var new_code = h.new_code,
     returns  = h.returns,
     vars     = h.vars;
 
-describe( 'New Function', function () {
+describe( 'New Function: Returns stack requirements', function () {
+
+  it( 'raises error if Tokens values length are unequal to Tokens requirements length', function () {
+    var err = null;
+    var str = ' "Obj" = x[ ]x . Obj <x "++" , ~{  { "num1" #? "num2" #? } { }  { ~~~? } { } }~ . 2 Obj ++ ';
+
+    try {
+      new_code(str).run();
+    } catch (e) {
+      err = e;
+    };
+    assert.equal(err.message, "++: missing arguments in Returns stack: \"num1\" #?" );
+  });
+
+  it( 'raises error if Tokens stack do not pass Tokens stack requirements length', function () {
+    var err = null;
+    var str = ' "Obj" = x[ ]x . Obj <x "++" , ~{  { "num1" #? "num2" #? } { }  { ~~~? } { } }~ . "1" 2 Obj ++ ';
+
+    try {
+      new_code(str).run();
+    } catch (e) {
+      err = e;
+    };
+    assert.equal(err.message, "++: invalid arguments in Returns stack: \"num1\" \"1\" fails \"#?\"" );
+  });
+
+}); // === Returns stack ===========================================================================================
+
+
+describe( 'New Function: Tokens stack requirements', function () {
+
+  it( 'raises error if Tokens stack length is unequal to Tokens stack requirements length', function () {
+    var err = null;
+    var str = ' "Obj" = x[ ]x . Obj <x "++" , ~{  { } { "num1" #? "num2" #? }  { ~~~? } { } }~ . Obj ++ 1 ';
+
+    try {
+      new_code(str).run();
+    } catch (e) {
+      err = e;
+    };
+    assert.equal(err.message, "++: missing arguments in Tokens stack: \"num2\" #?" );
+  });
+
+  it( 'raises error if Tokens do not pass Tokens stack requirements length', function () {
+    var err = null;
+    var str = ' "Obj" = x[ ]x . Obj <x "++" , ~{  { } { "num1" #? "num2" #? }  { ~~~? } { } }~ . Obj ++ 1 "2" ';
+
+    try {
+      new_code(str).run();
+    } catch (e) {
+      err = e;
+    };
+    assert.equal(err.message, "++: invalid arguments in Tokens stack: \"num2\" \"2\" fails \"#?\"" );
+  });
+
+}); // === Tokens stack ===========================================================================================
+
+describe( 'New Function: Returns', function () {
 
   it( 'raises error if return values length are unequal to return requirements length', function () {
     var err = null;
@@ -30,6 +87,10 @@ describe( 'New Function', function () {
     };
     assert.equal(err.message, "++: returning inadequate number of values: [empty list] => ~~~?" );
   });
+
+}); // === Returns ===========================================================================================
+
+describe( 'New Function:', function () {
 
   it( 'creates a runnable function', function () {
     var str = '        \
