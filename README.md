@@ -88,7 +88,7 @@ In a string or a file:
     [<>] <+[
        { "str" ~~~? } "to-number" { }
        { #? }
-       { [<>] get "Number Names" get str }
+       { [<>] x "Number Names" x str }
      ]+>
 
 
