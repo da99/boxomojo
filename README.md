@@ -85,11 +85,11 @@ In a string or a file:
       "Two"  = 2
     ]x
 
-    [<>] <+[
-       { "str" ~~~? } "to-number" { }
+    [<>] <x "to-number" ,  ~{
+       { "str" ~~~? } { }
        { #? }
        { [<>] x "Number Names" x str }
-     ]+>
+    }~
 
 
     "Zero" to-number
