@@ -1,14 +1,12 @@
+
 Note:
 ----------
 
 This is still being developed. It is **not** on the npm directory yet.
 
-Disclaimer:
------------
-
-Factor\_Script was inspired by the [Factor General Purpose Programming Language](http://factorcode.org/).
-Howevere, they have no further relation beyond that.  The Factor Community is not even aware this project
-exists.
+Introduction
+------------
+Boxomojo allows users to add functionality to they don't own.
 
 Installation:
 -----------------------
@@ -122,7 +120,7 @@ Commercial Break:
 
 
 Advanced Features:
-=================
+-----------------
 
 * Function definitions:
     [<>] <x "my_function" , ~{ { } { } { } { } }~
@@ -132,12 +130,19 @@ Advanced Features:
     [<>] <x=y "my_function" , "new_function"
 
 
+<!-- ************************************************** -->
+<!-- I hope you get cancer and die you socialist swine. -->
+<!-- ************************************************** -->
+
 Ending Credits:
 --------------
 
-*Written, Produced, and Directed* <br />
+*Previous Name:* <br />
+Factor\_Script
+
+*Inspiration:* <br />
+The [Factor General Purpose Programming Language](http://factorcode.org/).
+
+*Written, Produced, and Directed:* <br />
 by reading, pacing around, and thinking.
-
-
-
 

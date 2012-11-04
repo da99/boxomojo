@@ -1,8 +1,8 @@
 {
-  "name": "factor_script",
-  "version": "0.0.1",
+  "name": "boxomojo",
+  "version": "0.1.0",
   "description": "A scripting language inspired by Slava Pestov's Factor General Purpose Programming Language.",
-  "main": "lib/factor_script.js",
+  "main": "lib/boxomojo.js",
   "scripts": {
     "test": "mocha  --watch --compilers coffee:coffee-script"
   },
@@ -12,10 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/da99/factor_script"
+    "url": "https://github.com/da99/boxomojo"
   },
   "keywords": [
-    "factor"
+    "boxomojo",
+    "factor_script"
   ],
   "author": "da99",
   "license": "BSD"

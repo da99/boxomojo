@@ -2,8 +2,8 @@
 
 var assert  = require('assert'),
     _       = require("underscore"),
-    h       = require("factor_script/lib/test/default"),
-    Parse   = require('factor_script/lib/Parse');
+    h       = require("boxomojo/lib/test/default"),
+    Parse   = require('boxomojo/lib/Parse');
 
 var new_code = h.new_code,
     returns  = h.returns,
@@ -29,7 +29,7 @@ describe( 'Comments', function () {
       assert.deepEqual(returns(str), [target]);
     });
 
-    it( 'ignores valid factor_script code in comments', function () {
+    it( 'ignores valid boxomojo code in comments', function () {
       var str = '           \
         #!!!                \
         [ 1 ]               \
@@ -52,7 +52,7 @@ describe( 'Comments', function () {
       assert.deepEqual(returns(str), [target]);
     });
 
-    it( 'ignores valid factor_script code in comments', function () {
+    it( 'ignores valid boxomojo code in comments', function () {
       var str = ' #! [ 1 ] ';
       assert.deepEqual( returns(str), [ ] );
     });

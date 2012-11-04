@@ -1,9 +1,9 @@
 
-h      = require 'factor_script/lib/helpers'
+h      = require 'boxomojo/lib/helpers'
 assert = require 'assert'
 _      = require 'underscore'
-objs   = require 'factor_script/lib/Objects'
-fs     = require 'factor_script'
+objs   = require 'boxomojo/lib/Objects'
+fs     = require 'boxomojo'
 
 describe "Helpers: Copy", () ->
 
@@ -43,7 +43,7 @@ describe "Helpers: Copy", () ->
 
       assert.deepEqual c, { a: [[1,2,3],[4,5,6]], b: [[1,2,3],[4,5,6]] }
 
-  describe 'Factor Script objects', () ->
+  describe 'Boxomojo objects', () ->
 
     it "does not copy FS box", () ->
       o = new fs.Box("")

@@ -2,8 +2,8 @@
 
 var assert  = require('assert'),
     _       = require("underscore"),
-    h       = require("factor_script/lib/test/default"),
-    Parse   = require('factor_script/lib/Parse');
+    h       = require("boxomojo/lib/test/default"),
+    Parse   = require('boxomojo/lib/Parse');
 
 var new_code = h.new_code,
     returns  = h.returns,

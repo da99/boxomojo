@@ -1,6 +1,6 @@
 
 assert = require 'assert'
-Pos    = require 'factor_script/lib/Array_Position'
+Pos    = require 'boxomojo/lib/Array_Position'
 
 describe 'Array_Position',  () ->
 

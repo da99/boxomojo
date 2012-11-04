@@ -1,8 +1,8 @@
 var _  = require("underscore"),
-script = require("factor_script"),
+script = require("boxomojo"),
 assert = require("assert");
 
-var h    = require("factor_script/lib/test/default"),
+var h    = require("boxomojo/lib/test/default"),
 new_code = h.new_code,
 vars     = h.vars;
 

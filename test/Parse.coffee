@@ -1,8 +1,8 @@
 
-Parse  = require('factor_script/lib/Parse')
+Parse  = require('boxomojo/lib/Parse')
 Parser = Parse.Parser
 assert  = require 'assert'
-helpers = require "factor_script/lib/test/default"
+helpers = require "boxomojo/lib/test/default"
 _       = require 'underscore'
 
 str = helpers.str
