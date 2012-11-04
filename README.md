@@ -11,7 +11,7 @@ Boxomojo allows users to add functionality to they don't own.
 Installation:
 -----------------------
 
-    shell> npm install factor_script
+    shell> npm install boxomojo
 
 Use:
 -----------------------
@@ -51,8 +51,6 @@ In a string or a file:
                 It is equivalent to: run { [<>] update: ^[]^  }
 
           { }   Anonymous function.
-                Factor uses the [ ] brackets.
-                Factor_Script uses { } brackets.
 
           [ ]   A list. Known as Array in other languages.
 
@@ -74,18 +72,18 @@ In a string or a file:
     if ( One == 1 ) {
       "Result" = "it works"
     } else {
-      "Result" = "Factor_Script does not work"
+      "Result" = "Boxomojo does not work"
     }
 
     "Array"           = [ 0 1 2 3 4 ]
     "Optional Commas" = [ 0 , 1 , 2 ]
     "Adding Arrays"   = [ 1 2 3 ] + [ 4 5 6 ]
 
-    "Number Names" = u[
+    "Number Names" = x[
       "Zero" = 0
       "One"  = 1
       "Two"  = 2
-    ]u
+    ]x
 
     [<>] <+[
        { "str" ~~~? } "to-number" { }
@@ -99,8 +97,8 @@ In a string or a file:
 In your JavaScript code:
 
 
-    var factor_script = require('factor_script');
-    var box = new factor_script.Box( YOUR_FACTOR_SCRIPT_STRING );
+    var boxomojo = require('factor_script');
+    var box = new boxomojo.Box( YOUR_FACTOR_SCRIPT_STRING );
     box.run();
     box.Returns;  // ===> Returns an Array. Treat it as a stack.
     box.Vars;     // ===> Returns an Object (aka Hash).
