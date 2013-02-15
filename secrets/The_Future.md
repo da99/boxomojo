@@ -22,3 +22,10 @@ In the future...
     Theory, , and Fringe Theorys will allow non-Ph.Ds
     (outsider omni-curious personality amatuers)
     to develop this "impossible" future.
+
+  * People will still just want to talk with their idiot
+    friends and family. Faradays and Slava Pestovs will
+    still be rare.  More reason why:
+    https://sites.google.com/site/steveyegge2/ten-predictions
+    (reason #6 of that list.)
+
