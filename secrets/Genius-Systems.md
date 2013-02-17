@@ -39,3 +39,10 @@ How do you make genius systems popular with The Moron Majority?
   be satisfied ONLY when they are talking. Learning gets
   in the way of talking.
 
+* Genius systems (Xanadu, Squeak) are not enough. Personality
+  is far more important. No matter how well you organize
+  ideas, Alan Kay/Ted Nelson/etc. will never accept the
+  Electric University theory, Austrian Economics, or the
+  Over-Mineralization Theory of Aging and Health... despite
+  their education and thrust for knowledge.
+
