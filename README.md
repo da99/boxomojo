@@ -6,7 +6,9 @@ This is still being developed. It is **not** on the npm directory yet.
 
 Introduction
 ------------
-Boxomojo allows users to add functionality to they don't own.
+Boxomojo allows users to run code from other people in your web-page.
+It does not compile to JavaScript. Instead, it is run by JavaScript.
+It sandboxes that code. (eg an alternative to [Adsafe](http://www.adsafe.org/)).
 
 Installation:
 -----------------------
@@ -50,11 +52,18 @@ In a string or a file:
                 and the last value is returned.
                 It is equivalent to: run { [<>] update: ^[]^  }
 
-          { }   Anonymous function.
+          [ ]   A list. Known as Array in other languages. (This is not a linked
+                list. It is named "list" because Boxomojo is meant for humans,
+                not programmers.)
 
-          [ ]   A list. Known as Array in other languages.
+          { }   A box. Think of it a Hash/Dictionary that is also an object.
+                Example:
+                { 
+                   a = "some val"
+                   b = "other val"
+                   c = 123
+                }
 
-         x[ ]x  A box. Think of it a Hash/Dictionary that is also an object.
 
           "s"       String. Delimiters:  " "
          &[ ]&      String. Example:  &[ my "crazy" $!@#%^&* 'string' ]&
@@ -69,7 +78,7 @@ In a string or a file:
 
     "One" = 1
 
-    if ( One == 1 ) {
+    if ( One =? 1 ) {
       "Result" = "it works"
     } else {
       "Result" = "Boxomojo does not work"
@@ -79,17 +88,15 @@ In a string or a file:
     "Optional Commas" = [ 0 , 1 , 2 ]
     "Adding Arrays"   = [ 1 2 3 ] + [ 4 5 6 ]
 
-    "Number Names" = x[
+    "Number Names" = {
       "Zero" = 0
       "One"  = 1
       "Two"  = 2
-    ]x
+    }
 
-    [<>] <x "to-number" ,  ~{
-       { "str" ~~~? } { }
-       { #? }
-       { [<>] x "Number Names" x str }
-    }~
+    "to-number" =f {
+       "Number Names" : Left_Stack_Pop
+    }
 
 
     "Zero" to-number
@@ -97,8 +104,8 @@ In a string or a file:
 In your JavaScript code:
 
 
-    var boxomojo = require('factor_script');
-    var box = new boxomojo.Box( YOUR_FACTOR_SCRIPT_STRING );
+    var Boxomojo = require('boxomojo').Boxomojo;
+    var box = Boxomojo.new( YOUR_FACTOR_SCRIPT_STRING );
     box.run();
     box.Returns;  // ===> Returns an Array. Treat it as a stack.
     box.Vars;     // ===> Returns an Object (aka Hash).
@@ -121,11 +128,17 @@ Advanced Features:
 -----------------
 
 * Function definitions:
-    [<>] <x "my_function" , ~{ { } { } { } { } }~
+    "my_function" = { print "a" }
 
 * Function call routes: Called "Multiple Dispatching", "Function Overloading"
   in other languages.
-    [<>] <x=y "my_function" , "new_function"
+    extend "+" with: "+_for_cars" =f {
+      "car_a" <stack_pop> "car_b"
+      if ( ( car_a : type not= 'Car' ) or ( car_b : type not= 'Car' ) ) [
+        Push_back_and_pass.
+      ]
+      #!  Your code here.
+    }
 
 
 <!-- ************************************************** -->
