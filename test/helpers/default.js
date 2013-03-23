@@ -9,7 +9,7 @@ module.exports.vars = function(c) {
 };
 
 module.exports.returns = function(c) {
-  var box =  Box.new(c);
+  var box =  B.new(c);
   box.run();
   return box.Returns;
 };
