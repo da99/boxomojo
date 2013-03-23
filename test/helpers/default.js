@@ -2,6 +2,10 @@ var B  = require("boxomojo").Boxomojo,
 Parser = require("boxomojo/lib/Parser").Parser
 ;
 
+module.exports.new_code = function(c) {
+  return B.new(c);
+};
+
 module.exports.vars = function(c) {
   var box =  B.new(c);
   box.run();

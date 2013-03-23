@@ -1,40 +1,20 @@
 
 var assert  = require('assert'),
     _       = require("underscore"),
-    h       = require("boxomojo/lib/test/default"),
-    Parse   = require('boxomojo/lib/Parse');
+    h       = require("boxomojo/test/helpers/default"),
+    Parser  = require('boxomojo/lib/Parser').Parser
+;
 
 var new_code = h.new_code,
     returns  = h.returns;
 
 describe( 'Core', function () {
 
-  describe( '=', function () {
-
-    it( 'raises error if name of variable is already a function name', function () {
-      var box = new_code(' "One" = "yoyo" ');
-      box.Vars['One'] = function (box) {
-        return true;
-      };
-
-      var err = null;
-
-      try {
-        box.run();
-      } catch (e) {
-        var err = e;
-      };
-
-      assert.equal( err.message, "<x: Var already created: One" );
-    });
-
-  }); // === describe
-
   describe( '[<>]', function () {
     it( 'puts itself on the stack', function () {
       var box = new_code("[<>]");
       box.run();
-      assert.equal( box, box.see_backward() );
+      assert.equal( box, box.read_left() );
     });
 
     it( 'accepts functions in Core', function () {
