@@ -14,7 +14,7 @@ describe( 'Core', function () {
     it( 'puts itself on the stack', function () {
       var box = new_code("[<>]");
       box.run();
-      assert.equal( box, box.read_left() );
+      assert.equal( box, box.read_back() );
     });
 
     it( 'accepts functions in Core', function () {
