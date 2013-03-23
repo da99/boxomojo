@@ -49,9 +49,9 @@ describe( 'Base variables create', function () {
 
   it('saves variable to Returns stack',  function () {
 
-    var s = B.new(' "One" = 1 ');
+    var s = B.new(' "One" = 567 ');
     s.run();
-    assert.deepEqual(s.Returns, [ 1 ]);
+    assert.deepEqual(_.last(s.Returns), 567);
   });
 
   it( 'saves variables to Vars',  function () {
