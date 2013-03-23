@@ -3,7 +3,7 @@ Parser = require("boxomojo/lib/Parser").Parser
 ;
 
 module.exports.vars = function(c) {
-  var box =  Box.new(c);
+  var box =  B.new(c);
   box.run();
   return box.Vars;
 };
