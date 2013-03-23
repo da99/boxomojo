@@ -12,7 +12,11 @@ describe( 'New Function: Returns stack requirements', function () {
 
   it( 'raises error if Tokens values length are unequal to Tokens requirements length', function () {
     var err = null;
-    var str = ' "Obj" = x[ ]x Obj <x "++" , ~{  { "num1" #? "num2" #? } { }  { ~~~? } { } }~ []! 2 Obj ++ ';
+    var str = '\
+      "Obj" = x[ ]x \
+      Obj <x "++" , ~{  { "num1" #? "num2" #? } { }  { ~~~? } { } }~ \
+      []! 2 Obj ++ \
+    ';
 
     try {
       new_code(str).run();

@@ -6,13 +6,13 @@ var h    = require("boxomojo/lib/test/default"),
 new_code = h.new_code,
 vars     = h.vars;
 
-describe("Boxs: x[ ]x", function () {
+describe("Boxs: { }", function () {
 
   describe( 'syntax', function () {
 
     it("allows keys", function () {
 
-      var str = ' "My_Obj" = x[ "name" = "LIST" , "city" = "Hong Kong" ]x ';
+      var str = ' "My_Obj" = {  "name" = "LIST" , "city" = "Hong Kong" } ';
 
       assert.deepEqual(vars(str).My_Obj.Vars, {
         name: "LIST",
@@ -24,7 +24,7 @@ describe("Boxs: x[ ]x", function () {
 
       var str = ' \
         "Uno" = "uno" , "One" = "one" \
-        "My_Obj" = x[ "name" = Uno , "nick" = One ]x ';
+        "My_Obj" = { "name" = Uno , "nick" = One } ';
 
       assert.deepEqual(vars(str).My_Obj.Vars, {
         name: "uno",
@@ -37,7 +37,7 @@ describe("Boxs: x[ ]x", function () {
 
   describe( 'modules', function () {
     it( 'adds base module', function () {
-      var code = new_code(' x[ ]x ');
+      var code = new_code(' { } ');
       code.run();
       assert.equal(code.Returns[0].Modules.length, 1);
     });
@@ -50,7 +50,7 @@ describe("Boxs: x[ ]x", function () {
 
   describe( '=o', function () {
     it( 'adds name to "[ox]"', function () {
-      var code = new_code(' x[ "One" =o 1 ]x ');
+      var code = new_code(' { "One" =o 1 } ');
       code.run();
       assert.equal(code.Returns[0]['[ox]'], "One");
     });
@@ -59,13 +59,13 @@ describe("Boxs: x[ ]x", function () {
   describe( '<ox', function () {
 
     it( 'adds name to "[ox]"', function () {
-      var code = new_code(' "O" = x[ ]x <ox "One" 1');
+      var code = new_code(' "O" = { } <ox "One" 1');
       code.run();
       assert.deepEqual(code.Vars['O']['[ox]'], ["One"]);
     });
 
     it( 'adds var "', function () {
-      var code = new_code(' "V" = x[ ]x <ox "One" 1');
+      var code = new_code(' "V" = { } <ox "One" 1');
       code.run();
       assert.deepEqual(code.Vars['V']['[ox]'], ['One']);
     });

@@ -56,9 +56,11 @@ In a string or a file:
                 list. It is named "list" because Boxomojo is meant for humans,
                 not programmers.)
 
+         f[ ]f  Anonymous function.
+
           { }   A box. Think of it a Hash/Dictionary that is also an object.
                 Example:
-                { 
+                {
                    a = "some val"
                    b = "other val"
                    c = 123
@@ -94,7 +96,7 @@ In a string or a file:
       "Two"  = 2
     }
 
-    "to-number" =f {
+    "to-number" = {
        "Number Names" : Left_Stack_Pop
     }
 
@@ -132,11 +134,11 @@ Advanced Features:
 
 * Function call routes: Called "Multiple Dispatching", "Function Overloading"
   in other languages.
-    extend "+" with: "+_for_cars" =f {
-      "car_a" <stack_pop> "car_b"
-      if ( ( car_a : type not= 'Car' ) or ( car_b : type not= 'Car' ) ) [
-        Push_back_and_pass.
-      ]
+    "+" can_also_do "+_for_cars" =f {
+      Args:
+        [ Car?    | Car? ]
+        [ "car_a" | "car_b" ]
+
       #!  Your code here.
     }
 
