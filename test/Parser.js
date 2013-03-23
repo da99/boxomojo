@@ -112,10 +112,10 @@ describe('Parse [ ]', function () {
 });
 
 
-describe('Parse { }', function () {
+describe('Parse w[ ]w', function () {
 
-  it('separates { } as a Box', function () {
-    var result = parse(' "Var" = { d e f } ');
+  it('separates w[ ]w as a Box', function () {
+    var result = parse(' "Var" = w[ d e f ]w ');
     assert.deepEqual(result, [ "Var", to_verb("="),
       to_object( [to_verb('d'), to_verb('e'), to_verb('f')] )
     ]);
@@ -138,8 +138,8 @@ describe("Parse nesting blocks", function () {
     assert.deepEqual(result, target);
   });
 
-  it('separates nested ( f[ ]f  { {  } } ) as a Hash', function () {
-    var result = parse(' "Var" is:  ( f[ "a" "b" "c" ]f { d { "O" is: "a" } b c } ) ');
+  it('separates nested ( f[ ]f  w[ w[ ]w ]w ) as a Hash', function () {
+    var result = parse(' "Var" is:  ( f[ "a" "b" "c" ]f w[ d w[ "O" is: "a" ]w b c ]w ) ');
     var target = [
       "Var",
       to_verb("is:"),
@@ -160,23 +160,23 @@ describe("Parse nesting blocks", function () {
   it("raises an error if blocks are mismatch", function () {
     var err = null;
     try {
-      parse(' Var is:  ( { 1 2 3 ) ~[ 4 5 6 ] ) ');
+      parse(' Var is:  ( w[ 1 2 3 ) ~[ 4 5 6 ] ) ');
     } catch(e) {
       err = e;
     }
 
-    assert.deepEqual(err.message, "Closing wrong block: expected: } actual: )");
+    assert.deepEqual(err.message, "Closing wrong block: expected: ]w actual: )");
   });
 
   it("raises an error if closing an unopened block", function () {
     var err = null;
     try {
-      parse(' Var is: 1 2 3 } { 4 5 6 } ');
+      parse(' Var is: 1 2 3 ]w w[ 4 5 6 ]w ');
     } catch (e) {
       err = e
     }
 
-    assert.deepEqual(err.message, "Closing unopened block: }");
+    assert.deepEqual(err.message, "Closing unopened block: ]w");
   });
 
 });
