@@ -40,7 +40,7 @@ describe( '.run()', function () {
       var err = e;
     };
 
-    assert.deepEqual(err.message, "Function not found: " + word);
+    assert.deepEqual(err.message, "Not defined: " + word);
   });
 
 }); // === describe
