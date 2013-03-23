@@ -1,26 +1,26 @@
 
 var assert  = require('assert'),
     _       = require("underscore"),
-    h       = require("boxomojo/lib/test/default"),
-    Parse   = require('boxomojo/lib/Parse');
-
-var new_code = h.new_code;
+    h       = require("boxomojo/test/helpers/default"),
+    B       = require('boxomojo/lib/boxomojo').Boxomojo,
+    Parser  = require('boxomojo/lib/Parser').Parser
+;
 
 describe("New", function () {
 
   it("returns a script", function () {
-    var s = new_code(' "One" = 1 ');
-    assert.equal(s.is_box(), true);
+    var s = B.new(' "One" = 1 ');
+    assert.equal(s.is_box, true);
   });
 
   it("sets 'Code'", function () {
     var code = ' "One" = 1 ';
-    assert.equal(new_code(code).Code, code);
+    assert.equal(B.new(code).Code, code);
   });
 
   it( 'sets "Tokens"', function () {
     var code = ' "Hoppe" = "right" ';
-    assert.deepEqual(new_code(code).Tokens, h.to_tokens(code));
+    assert.deepEqual(B.new(code).Tokens, h.to_tokens(code));
   });
 
 }); // === describe
@@ -28,14 +28,14 @@ describe("New", function () {
 describe( '.run()', function () {
 
   it( 'returns last value', function () {
-    assert.deepEqual(new_code(" 5 + 1 ").run(), 6);
+    assert.deepEqual(B.new(" 5 + 1 ").run(), 6);
   });
 
   it( 'raises error if word not found', function () {
     var word = 'not-found-xyz', err  = null;
 
     try {
-      new_code(" " + word + " ").run();
+      B.new(" " + word + " ").run();
     } catch (e) {
       var err = e;
     };
@@ -49,14 +49,14 @@ describe( 'Base variables create', function () {
 
   it('saves variable to Returns stack',  function () {
 
-    var s = new_code(' "One" = 1 ');
+    var s = B.new(' "One" = 1 ');
     s.run();
     assert.deepEqual(s.Returns, [ 1 ]);
   });
 
   it( 'saves variables to Vars',  function () {
 
-    var s = new_code(' "One" = 1 ');
+    var s = B.new(' "One" = 1 ');
     s.run();
     assert.deepEqual(s.Vars, { 'One': 1 } );
 
@@ -68,13 +68,13 @@ describe( 'Base variables create', function () {
 describe('.Returns', function () {
 
   it( 'gathers numbers',  function () {
-    var s = new_code(' 1 2 3 ');
+    var s = B.new(' 1 2 3 ');
     s.run();
     assert.deepEqual(s.Returns, [ 1, 2, 3 ]);
   });
 
   it( 'gathers quoted strings',  function () {
-    var s = new_code(' "a"  "long string" "c" ');
+    var s = B.new(' "a"  "long string" "c" ');
     s.run();
     assert.deepEqual(s.Returns, [ 'a', 'long string', 'c' ]);
   });

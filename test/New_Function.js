@@ -13,7 +13,7 @@ describe( 'New Function: Returns stack requirements', function () {
   it( 'raises error if Tokens values length are unequal to Tokens requirements length', function () {
     var err = null;
     var str = '\
-      "Obj" = x[ ]x \
+      "Obj" = { } \
       Obj <x "++" , ~{  { "num1" #? "num2" #? } { }  { ~~~? } { } }~ \
       []! 2 Obj ++ \
     ';
@@ -30,7 +30,7 @@ describe( 'New Function: Returns stack requirements', function () {
 
   it( 'raises error if Tokens stack do not pass Tokens stack requirements length', function () {
     var err = null;
-    var str = ' "Obj" = x[ ]x . Obj <x "++" , ~{  { "num1" #? "num2" #? } { }  { ~~~? } { } }~ . "1" 2 Obj ++ ';
+    var str = ' "Obj" = { } . Obj <x "++" , ~{  { "num1" #? "num2" #? } { }  { ~~~? } { } }~ . "1" 2 Obj ++ ';
 
     try {
       new_code(str).run();
@@ -47,7 +47,7 @@ describe( 'New Function: Tokens stack requirements', function () {
 
   it( 'raises error if Tokens stack length is unequal to Tokens stack requirements length', function () {
     var err = null;
-    var str = ' "Obj" = x[ ]x . Obj <x "++" , ~{  { } { "num1" #? "num2" #? }  { ~~~? } { } }~ . Obj ++ 1 ';
+    var str = ' "Obj" = { } . Obj <x "++" , ~{  { } { "num1" #? "num2" #? }  { ~~~? } { } }~ . Obj ++ 1 ';
 
     try {
       new_code(str).run();
@@ -59,7 +59,7 @@ describe( 'New Function: Tokens stack requirements', function () {
 
   it( 'raises error if Tokens do not pass Tokens stack requirements length', function () {
     var err = null;
-    var str = ' "Obj" = x[ ]x . Obj <x "++" , ~{  { } { "num1" #? "num2" #? }  { ~~~? } { } }~ . Obj ++ 1 "2" ';
+    var str = ' "Obj" = { } . Obj <x "++" , ~{  { } { "num1" #? "num2" #? }  { ~~~? } { } }~ . Obj ++ 1 "2" ';
 
     try {
       new_code(str).run();
@@ -77,7 +77,7 @@ describe( 'New Function: Returns', function () {
     var err = null;
 
     var str = '        \
-      "Obj" = x[ ]x    \
+      "Obj" = { }    \
       <x "++" , ~{     \
         { } { }   \
         { ~~~? } \
@@ -100,7 +100,7 @@ describe( 'New Function:', function () {
 
   it( 'creates a runnable function', function () {
     var str = '        \
-      "Obj" = x[ ]x    \
+      "Obj" = { }    \
       <x "++" , ~{     \
         { }  { }       \
         { ~~~? }       \
@@ -113,7 +113,7 @@ describe( 'New Function:', function () {
 
   it( 'defines new function in target object', function () {
     var str = '          \
-      "Obj" = x[ ]x      \
+      "Obj" = { }      \
       <x "++" , ~{       \
         { } { }          \
         { ~~~? } \
@@ -143,7 +143,7 @@ describe( 'New Function:', function () {
 
 describe( 'New Function errors: ', function () {
   it( 'throws error if backward stack is uneven', function () {
-    var str = ' "Obj" = x[ ]x <x "++" , ~{ { "name" } { } { ~~~? } { "++" } }~ ';
+    var str = ' "Obj" = { } <x "++" , ~{ { "name" } { } { ~~~? } { "++" } }~ ';
     var err = null;
     try {
       returns(str);
@@ -154,7 +154,7 @@ describe( 'New Function errors: ', function () {
   });
 
   it( 'throws error if forward stack is uneven', function () {
-    var str = ' "Obj" = x[ ]x <x "++" , ~{ { } { "name" } { ~~~? } { "++" } }~ ';
+    var str = ' "Obj" = { } <x "++" , ~{ { } { "name" } { ~~~? } { "++" } }~ ';
     var err = null;
     try {
       returns(str);
@@ -165,7 +165,7 @@ describe( 'New Function errors: ', function () {
   });
 
   it( 'throws error if argument name is not a string', function () {
-    var str = ' "Obj" = x[ ]x <x "++" ~{ { } { 2 number? } { ~~~? } { "++" } }~ ';
+    var str = ' "Obj" = { } <x "++" ~{ { } { 2 number? } { ~~~? } { "++" } }~ ';
     var err = null;
     try {
       returns(str);
@@ -191,7 +191,7 @@ describe( 'New Function Call Route: <x=y', function () {
 
   it( 'creates alias in object', function () {
     var str = '   \
-    "KV" = x[ ]x  \
+    "KV" = { }  \
     KV <x=y "key" "new_key" \
     KV <x "new_key" , ~{ { } { } { ~~~? } {  "new func called" } }~ \
     KV key ';
@@ -212,7 +212,7 @@ describe( 'New Function Call Route: <x=~y', function () {
 
   it( 'creates alias in object', function () {
     var str = '   \
-    "KV" = x[ ]x  \
+    "KV" = { }  \
     KV <x=~y "key" , "new_key" , ~{ { } { } { ~~~? } {  "new func called" } }~ \
     KV key ';
     assert.equal(_.last(returns(str)), "new func called");

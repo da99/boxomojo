@@ -4,7 +4,7 @@
   "description": "A scripting language inspired by Slava Pestov's Factor General Purpose Programming Language.",
   "main": "lib/boxomojo.js",
   "scripts": {
-    "test": "mocha  --watch --compilers coffee:coffee-script"
+    "test": "mocha"
   },
   "dependencies": {
     "underscore": "1.x.x",
