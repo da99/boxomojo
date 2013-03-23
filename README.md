@@ -56,9 +56,9 @@ In a string or a file:
                 list. It is named "list" because Boxomojo is meant for humans,
                 not programmers.)
 
-         f[ ]f  Anonymous function.
+          { }   Anonymous function.
 
-          { }   A box. Think of it a Hash/Dictionary that is also an object.
+         w[ ]w  A box. Think of it a Hash/Dictionary that is also an object.
                 Example:
                 {
                    a = "some val"
@@ -90,11 +90,11 @@ In a string or a file:
     "Optional Commas" = [ 0 , 1 , 2 ]
     "Adding Arrays"   = [ 1 2 3 ] + [ 4 5 6 ]
 
-    "Number Names" = {
+    "Number Names" = w[
       "Zero" = 0
       "One"  = 1
       "Two"  = 2
-    }
+    ]w
 
     "to-number" = {
        "Number Names" : Left_Stack_Pop

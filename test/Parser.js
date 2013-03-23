@@ -89,10 +89,10 @@ describe("Parse ( )", function () {
   });
 });
 
-describe("Parse f[ ]f", function () {
+describe("Parse { }", function () {
 
-  it("separates f[ ]f as a Function", function () {
-    var result = parse(' "Var" = f[ z x c ]f ');
+  it("separates { } as a Function", function () {
+    var result = parse(' "Var" = { z x c } ');
     assert.deepEqual(result, [
       "Var",
       to_verb("="),
@@ -124,8 +124,8 @@ describe('Parse w[ ]w', function () {
 
 describe("Parse nesting blocks", function () {
 
-  it("parses ( f[ ]f ) as a Function within a Run Now Function", function () {
-    var result = parse(' "Var" is:  ( f[ "a" "b" "c" ]f f[ "d" "e" "f" ]f ) ');
+  it("parses ( { } ) as a Function within a Run Now Function", function () {
+    var result = parse(' "Var" is:  ( { "a" "b" "c" } { "d" "e" "f" } ) ');
     var target = [
       "Var",
       to_verb("is:"),
@@ -138,8 +138,8 @@ describe("Parse nesting blocks", function () {
     assert.deepEqual(result, target);
   });
 
-  it('separates nested ( f[ ]f  w[ w[ ]w ]w ) as a Hash', function () {
-    var result = parse(' "Var" is:  ( f[ "a" "b" "c" ]f w[ d w[ "O" is: "a" ]w b c ]w ) ');
+  it('separates nested ( { }  w[ w[ ]w ]w ) as a Hash', function () {
+    var result = parse(' "Var" is:  ( { "a" "b" "c" } w[ d w[ "O" is: "a" ]w b c ]w ) ');
     var target = [
       "Var",
       to_verb("is:"),
