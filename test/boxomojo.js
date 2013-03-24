@@ -25,6 +25,25 @@ describe("New", function () {
 
 }); // === describe
 
+describe( 'Base variables create', function () {
+
+  it('saves variable to Returns stack',  function () {
+
+    var s = B.new(' "One" = 567 ');
+    s.run();
+    assert.deepEqual(_.last(s.Returns), 567);
+  });
+
+  it( 'saves variables to Vars',  function () {
+
+    var s = B.new(' "One" = 1 ');
+    s.run();
+    assert.deepEqual(s.Vars, { 'One': 1 } );
+
+  });
+
+}); // === describe
+
 describe( '.run()', function () {
 
   it( 'returns last value', function () {
@@ -41,25 +60,6 @@ describe( '.run()', function () {
     };
 
     assert.deepEqual(err.message, "Not defined: " + word);
-  });
-
-}); // === describe
-
-describe( 'Base variables create', function () {
-
-  it('saves variable to Returns stack',  function () {
-
-    var s = B.new(' "One" = 567 ');
-    s.run();
-    assert.deepEqual(_.last(s.Returns), 567);
-  });
-
-  it( 'saves variables to Vars',  function () {
-
-    var s = B.new(' "One" = 1 ');
-    s.run();
-    assert.deepEqual(s.Vars, { 'One': 1 } );
-
   });
 
 }); // === describe

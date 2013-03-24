@@ -2,8 +2,9 @@
 
 var assert  = require('assert'),
     _       = require("underscore"),
-    h       = require("boxomojo/lib/test/default"),
-    Parse   = require('boxomojo/lib/Parse');
+    h       = require("boxomojo/test/helpers/default"),
+    Box     = require("boxomojo").Boxomojo,
+    Parser  = require('boxomojo/lib/Parser').Parser;
 
 var new_code = h.new_code,
     returns  = h.returns,
@@ -12,14 +13,10 @@ var new_code = h.new_code,
 describe( 'Functions', function () {
 
   describe( 'run: ', function () {
-    it( 'copys tokens of function', function () {
-      var code = new_code(' "F" = { 1 2 3 } run F ');
-      code.run();
-      assert.deepEqual(code.Vars['F'].Tokens, [1,2,3]);
-    });
-    it( 'does not place anything on Returns stack if function has an empty Returns stack (ie prevent undefined)', function () {
+
+    it( 'places NONE on Returns stack if function has an empty Returns stack (ie prevent undefined)', function () {
       var str = ' run {  } ';
-      assert.deepEqual( returns(str), [ ] );
+      assert.deepEqual( returns(str), [Box.NONE] );
     });
 
     it( 'returns last value', function () {
@@ -27,10 +24,11 @@ describe( 'Functions', function () {
       assert.deepEqual( returns(str), [3] );
     });
 
-    it( 'saves vars to Outside box', function () {
+    it( 'does not save vars to Outside box', function () {
       var str = ' run { "One" = "Neo" } ';
-      assert.deepEqual( vars(str).One, "Neo" );
+      assert.deepEqual( _.isEmpty(vars(str)), true );
     });
+
   }); // === describe
 
 }); // === describe
