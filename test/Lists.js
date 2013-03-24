@@ -1,8 +1,9 @@
 
 var assert  = require('assert'),
     _       = require("underscore"),
-    h       = require("boxomojo/lib/test/default"),
-    Parse   = require('boxomojo/lib/Parse');
+    h       = require("boxomojo/test/helpers/default"),
+    Parser  = require('boxomojo/lib/Parser').Parser
+;
 
 var new_code = h.new_code,
     returns  = h.returns,
