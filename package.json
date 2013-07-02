@@ -1,7 +1,7 @@
 {
   "name": "boxomojo",
   "version": "0.1.0",
-  "description": "A scripting language inspired by Slava Pestov's Factor General Purpose Programming Language.",
+  "description": "NOt ready.",
   "main": "lib/boxomojo.js",
   "scripts": {
     "test": "mocha"
