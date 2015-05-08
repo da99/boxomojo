@@ -29,6 +29,8 @@ case "$action" in
 
   "watch")
     echo "=== Watching: "
+    bin/boxomojo test "$@" || true
+
     inotifywait -q --exclude .git/ -e close_write,close -m -r .  | while read CHANGE
     do
       dir=$(echo "$CHANGE" | cut -d' ' -f 1)

@@ -11,14 +11,24 @@ class Boxomojo
       @meta  = {:name=>name, :args=>args}
     end
 
+    def name
+      @meta[:name]
+    end
+
+    def args
+      @meta[:args]
+    end
+
     def push *args
       stack.concat args
     end
 
-    def new_box name, *args, &blok
-      @stack.<<(
-        self.class.new(name, *args).run(&blok)
-      )
+    def new_box name, *args
+      box = self.class.new(name, *args)
+      if block_given?
+        box.run(&(Proc.new))
+      end
+      @stack.<<( box )
     end
 
     def update key, *args
@@ -29,11 +39,7 @@ class Boxomojo
           @kv[key] = [@kv[key]].concat(args)
         end
       else
-        @kv[key] = if args.size == 1
-                     args.first
-                   else
-                     args
-                   end
+        @kv[key] = args
       end
       args
     end
@@ -50,12 +56,30 @@ class Boxomojo
       c = Class.new {
         include Boxomojo::Mod
         names.each { |sym|
+          if sym.is_a?(Hash)
+            sym.each { |k, v|
+              case
+              when :block
+                [v].flatten.each { |name|
+                  eval <<-EOF, nil, __FILE__, __LINE__ + 1
+                    def #{name} *args, &blok
+                      new_box :#{name}, *args, blok
+                    end
+                  EOF
+                }
+              else
+                fail ArgumentError, "Unknow type: #{k.inspect}"
+              end
+            }
+            next
+          end
+
           eval <<-EOF, nil, __FILE__, __LINE__+1
             def #{sym} *args
               if block_given?
                 new_box :#{sym}, *args, &(Proc.new)
               else
-                update *args
+                update :#{sym}, *args
               end # === if
             end
           EOF

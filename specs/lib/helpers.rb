@@ -19,3 +19,7 @@ def stack box
     end
   }
 end
+
+def kv box
+  box.kv
+end
