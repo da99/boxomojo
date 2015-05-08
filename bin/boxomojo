@@ -51,7 +51,7 @@ case "$action" in
           exec $path "watch" "$@"
         fi
 
-        if [[ "$path" == *spec* ]]; then
+        if [[ "$path" == *.rb* ]]; then
           echo "=== Running tests: $@"
           bin/boxomojo test "$@" || true
         fi
