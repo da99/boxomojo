@@ -7,9 +7,10 @@ Gem::Specification.new do |spec|
   spec.version       = `cat VERSION`
   spec.authors       = ["da99"]
   spec.email         = ["i-hate-spam-1234567@mailinator.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
+  spec.summary       = %q{My own way of creating internal DSLs.}
   spec.description   = %q{
-    TODO: Write a longer description. Optional.
+    An internal DSL for creating/managing Hashes and Arrays.
+    You will not use it since it only suits me tastes.
   }
   spec.homepage      = "https://github.com/da99/boxomojo"
   spec.license       = "MIT"
