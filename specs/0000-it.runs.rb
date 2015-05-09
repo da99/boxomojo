@@ -2,7 +2,7 @@
 describe "boxomojo" do
 
   it "runs" do
-    results = Boxomojo.new(:p).new.run {
+    results = Boxomojo.new(:p).new {
       p {
         push "This is text."
         p {
@@ -20,7 +20,7 @@ describe "boxomojo" do
   end # === it
 
   it "saves methods calls w/o blocks as meta kv" do
-    results = Boxomojo.new(:css, :style).new.run {
+    results = Boxomojo.new(:css, :style).new {
       css 'happy'
       style 'red'
     }
@@ -36,7 +36,7 @@ end # === describe "boxomojo"
 describe ":block" do
 
   it "does not evaluate the block" do
-    results = Boxomojo.new(:val, :block=>:change_to).new.run {
+    results = Boxomojo.new(:val, :block=>:change_to).new {
       val 5
       change_to { :a }
     }
@@ -49,7 +49,7 @@ end # === describe ":block"
 describe ":collect" do
 
   it "collects value rather than updates value" do
-    results = Boxomojo.new(:val, :collect=>[:names,:places]).new.run {
+    results = Boxomojo.new(:val, :collect=>[:names,:places]).new {
       val 5
       names :happy
       names :sad

@@ -9,6 +9,7 @@ class Boxomojo
       @stack = []
       @kv    = {}
       @meta  = {:name=>name, :args=>args}
+      run(&Proc.new) if block_given?
     end
 
     def name
