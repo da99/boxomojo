@@ -31,17 +31,22 @@ class Boxomojo
       @stack.<<( box )
     end
 
-    def update key, *args
-      if @kv.has_key?(key)
-        if @kv[key].is_a?(Array)
-          @kv[key].concat args
-        else
-          @kv[key] = [@kv[key]].concat(args)
-        end
+    def update key, arr
+      if arr.size == 1 || arr.empty?
+        @kv[key] = arr.first
       else
-        @kv[key] = args
+        @kv[key] = arr
       end
-      args
+      arr
+    end
+
+    def collect key, arr
+      if !@kv.has_key?(key)
+        @kv[key] = []
+      end
+
+      @kv[key].concat arr
+      arr
     end
 
     def run &blok
@@ -53,36 +58,55 @@ class Boxomojo
 
   class << self
     def new *names
+      kv = if names.last.is_a?(Hash)
+             h = names.pop
+             h[:names] = names
+             h
+           else
+             {:names=>names}
+           end
+
       c = Class.new {
         include Boxomojo::Mod
-        names.each { |sym|
-          if sym.is_a?(Hash)
-            sym.each { |k, v|
-              case
-              when :block
-                [v].flatten.each { |name|
-                  eval <<-EOF, nil, __FILE__, __LINE__ + 1
-                    def #{name} *args, &blok
-                      new_box :#{name}, *args, blok
-                    end
-                  EOF
-                }
-              else
-                fail ArgumentError, "Unknow type: #{k.inspect}"
-              end
-            }
-            next
-          end
+        kv.each { |k, sym_or_arr|
+          arr = [sym_or_arr].flatten
 
-          eval <<-EOF, nil, __FILE__, __LINE__+1
-            def #{sym} *args
-              if block_given?
-                new_box :#{sym}, *args, &(Proc.new)
-              else
-                update :#{sym}, *args
-              end # === if
-            end
-          EOF
+          case k
+          when :names
+            arr.each { |name|
+              eval <<-EOF, nil, __FILE__, __LINE__+1
+                def #{name} *args
+                  if block_given?
+                    new_box :#{name}, *args, &(Proc.new)
+                  else
+                    update :#{name}, args
+                  end # === if
+                end
+              EOF
+            }
+
+          when :block
+            arr.each { |name|
+              eval <<-EOF, nil, __FILE__, __LINE__ + 1
+                def #{name} *args, &blok
+                  new_box :#{name}, *args, blok
+                end
+              EOF
+            }
+
+          when :collect
+            arr.each { |name|
+              eval <<-EOF, nil, __FILE__, __LINE__+1
+                def #{name} *args
+                  collect :#{name}, args
+                end
+              EOF
+            }
+
+          else
+            fail ArgumentError, "Unknow type: #{k.inspect}"
+
+          end # === case k
         }
       }
     end

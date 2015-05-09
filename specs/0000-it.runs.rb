@@ -23,12 +23,11 @@ describe "boxomojo" do
     results = Boxomojo.new(:css, :style).new.run {
       css 'happy'
       style 'red'
-      css 'sad'
     }
 
     kv(results).should == {
-      :css   => ['happy', 'sad'],
-      :style => ['red']
+      :css   => 'happy',
+      :style => 'red'
     }
   end # === it
 
@@ -46,3 +45,19 @@ describe ":block" do
   end # === it
 
 end # === describe ":block"
+
+describe ":collect" do
+
+  it "collects value rather than updates value" do
+    results = Boxomojo.new(:val, :collect=>[:names,:places]).new.run {
+      val 5
+      names :happy
+      names :sad
+      places :glasgow
+      places :oxford
+    }
+
+    results.kv.should == {:val=>5, :names=>[:happy,:sad], :places=>[:glasgow, :oxford]}
+  end # === it
+
+end # === describe ":collect"
