@@ -9,20 +9,21 @@ I'm too tired to write anymore.
 
 
 ```ruby
-    box_class = Boxomojo.new(:val, :collect=>[:names,:places])
+    box_class = Boxomojo.new(:val, :names,:places)
 
-    box_class.new {
+    result = box_class.new {
       val 5
       names :happy
       names :sad
       places :glasgow
-      places :oxford
+      places :oxford do
+        names :apathy
+        names :joy
+      end
     }
 
     require "awesome_print"
-    ap box.kv, :indent=>-2
-    ap box.stack, :indent=>-2
-    ap box.meta, :indent=>-2
+    ap result, :indent=>-2
 ```
 
 

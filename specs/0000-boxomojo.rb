@@ -24,24 +24,45 @@ describe "boxomojo" do
       }
     }
 
-    stack(results).should == [
+    results.should == [
       [
-        "This is text.",
-        ["This is another paragraph."]
+        :p, [], [
+          "This is text.",
+          [:p, [], ["This is another paragraph."]]
+        ]
       ]
     ]
   end # === it
 
-  it "saves methods calls w/o blocks as meta kv" do
+  it "saves methods calls w/o blocks" do
     results = Boxomojo.new(:css, :style).new {
       css 'happy'
       style 'red'
     }
 
-    kv(results).should == {
-      :css   => 'happy',
-      :style => 'red'
-    }
+    results.should == [
+      [:css,   ['happy'], nil],
+      [:style, ['red'],   nil]
+    ]
   end # === it
 
 end # === describe "boxomojo"
+
+describe ":block" do
+
+  it "does not evaluate the block" do
+    p = Proc.new { something }
+    results = Boxomojo.new(:val, :block=>:change_to).new {
+      val 5
+      change_to(&p)
+    }
+
+    results.should == [
+      [:val, [5], nil],
+      [:change_to, [], p]
+    ]
+  end # === it
+
+end # === describe ":block"
+
+
